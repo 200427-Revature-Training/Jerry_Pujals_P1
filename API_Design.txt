@@ -1,0 +1,7 @@
+POST/login_user - Logs into account
+POST/login_manager - Logs into admin account
+GET/tickets - Gets tickets posted with account
+POST/add_ticket - Makes a new reimbursement ticket
+GET/all_tickets - Retrieves all tickets for all employees
+GET/all_tickets/:status - Filters tickets by status
+PATCH/ticket/:id - Updates the status of a ticket, aproving or denying it.
