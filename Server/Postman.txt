@@ -1,0 +1,26 @@
+ {
+        "Name": "Gorge",
+        "Password": "Pass",
+        "Address": "9876 NE 567 PL",
+        "card": 8765432190
+        
+    }
+    
+    
+
+ {
+        "itemname": "Game",
+        "ammount": 1,
+        "price": 10
+        
+    }
+
+ {
+      
+        "destination": "place",
+        "account": 2,
+        "itemnum": 4,
+        "quant": 1,
+        "total_pay": 300
+        
+    }
