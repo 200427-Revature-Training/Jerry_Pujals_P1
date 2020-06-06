@@ -2,9 +2,9 @@
   "name": "home-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "Server/index.js",
   "scripts": {
-    "start": "nodemon ./src/app.ts",
+    "start": "nodemon Server/src/app.ts",
     "test": "jest --verbose --coverage"
   },
   "author": "",
