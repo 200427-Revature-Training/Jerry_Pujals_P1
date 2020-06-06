@@ -1,51 +1,48 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { database } from './daos/database';
-import { AccountRouter } from './router/Account-router';
-import { ShipmentRouter } from './router/Shipment-router';
-import { InventoryRouter } from './router/Inventory-router';
+import { db } from './daos/db';
+import { peopleRouter } from './routers/people-router';
 
-// Make this a constant
 const app = express();
-// Setting port to access
+
 const port = process.env.port || 3000;
 app.set('port', port);
 
-// Middleware
+/* CORS middleware - Sets CORS headers to allow requests from
+        the domain of the intended client */
+app.use((request, response, next) => {
+    response.setHeader('Access-Control-Allow-Origin', 'http://jerrypujalshomeapp.s3.us-east-2.amazonaws.com');
+    response.setHeader('Access-Control-Allow-Headers', 'content-type')
+    // response.setHeader('Access-Control-Allow-Methods', 'GET POST');
+    next();
+})
 
+/*
+    ? Middleware Registration
+*/
 app.use(bodyParser.json());
 
-app.use('/Admin_Accounts', AccountRouter);
-app.use('/Inventory', InventoryRouter);
-app.use('/Admin_Shipments', ShipmentRouter);
+/*
+    ? Router Registration
+*/
+app.use('/people', peopleRouter);
 
-// Error handelling
+/*
+    Listen for SIGINT signal - issued by closing the server with ctrl+c
+    This releases the database connections prior to app being stopped
+*/
+// process.on('SIGINT', () => {
+//     db.end().then(() => {
+//         console.log('Database pool closed');
+//     });
+// });
+
 process.on('unhandledRejection', () => {
-    database.end().then(() => {
+    db.end().then(() => {
         console.log('Database pool closed');
     });
 });
 
-// Logs
 app.listen(port, () => {
     console.log(`Home app running at http://localhost:${port}`);
 });
-
-/*
-Function ideas:
-Accounts:
-Admin get accounts
-Admin get account by id
-Make account
-Set info (use password)
-
-Inventory:
-GetInventory
-AddToInv
-RemoveFromInv
-
-Shipment:
-AdminGetshipments
-MakeShipment
-Cancelshipment
-*/
