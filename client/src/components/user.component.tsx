@@ -4,15 +4,16 @@ import { User } from '../models/User';
 import './user.component.css';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-const loggedin = false;
+var loggedin = false;
 
 export const UserComponent: React.FC = () => {
     const [user, setUsers] = useState<User[]>([]);
-
+    const [inputUserName, setInputUserName] = useState('');
+    const [inputPassword, setInputPassword] = useState('');
 
 
     useEffect(() => {
-        loadUser();
+        login();
     }, [])
 
    
@@ -22,6 +23,31 @@ export const UserComponent: React.FC = () => {
             setUsers(user);
         });        
     }
+
+    const login = async () => {
+        //
+        const payload = {
+            userName: inputUserName,
+            password: inputPassword,
+            firstName: '',
+             lastName: '',
+             email: '',
+             roleId: 0
+        };
+
+        await userRemote.login(payload).then(user =>{
+                if(user){
+                    loggedin = true; 
+                }
+        });
+        //resets form boxes
+        setInputUserName('');
+        setInputPassword('');  
+             
+       // loadUser();
+    }
+
+
 
 if(loggedin){
     return (
@@ -61,7 +87,6 @@ if(loggedin){
                 </tbody>
             </table>
 
-            {/* react-bootstrap components */}
            
 
            
@@ -77,7 +102,33 @@ if(loggedin){
                     </h2>
                 </header>
     
-                {/* react-bootstrap components */}
+                <section id="login-container">
+               <form>
+
+                <div>
+                    <label><div>User Name:</div>
+                    <input 
+                        value={inputUserName} 
+                        onChange={(e) => setInputUserName(e.target.value)} 
+                        type="text" />
+                    </label>
+                </div>
+
+                <div>
+                    <label><div>Password:</div>
+                    <input value={inputPassword} 
+                        onChange={(e) => setInputPassword(e.target.value)}
+                        type="text" />
+                    </label>
+                </div>
+
+            <div>
+                <button onClick={() => login()}>Log in</button>
+            </div>
+
+            </form>
+
+        </section>
                
     
                

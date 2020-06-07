@@ -54,6 +54,7 @@ export const AccountComponent: React.FC = () => {
     }, [])
 
     const addUser = async () => {
+        //
         const payload = {
             firstName: inputFirstName,
             lastName: inputLastName,
@@ -61,6 +62,7 @@ export const AccountComponent: React.FC = () => {
         };
 
         await peopleRemote.createPerson(payload);
+        //resets form boxes
         setInputBirthdate('');
         setInputFirstName('');
         setInputLastName('');

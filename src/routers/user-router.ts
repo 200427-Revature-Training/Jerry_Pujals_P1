@@ -9,8 +9,8 @@ const bcrypt = require('bcrypt');
 */
 userRouter.get('', async (request, response, next) => {
     try {
-        const people = await userService.getAllUsers();
-        response.json(people);
+        const users = await userService.getAllUsers();
+        response.json(users);
     } catch (err) {
         console.log(err);
         response.sendStatus(500);
@@ -19,8 +19,9 @@ userRouter.get('', async (request, response, next) => {
 });
 
 
-userRouter.get('/login', (request, response, next) => {
+userRouter.post('/login', (request, response, next) => {
 
+    //Gets user object from request input
     const user:any = {
         userName: request.body.userName,
         password: request.body.password,
@@ -30,6 +31,7 @@ userRouter.get('/login', (request, response, next) => {
         roleId: request.body.roleId
         };
 
+    //Sends input to userService.login and puts result into users var    
     userService.login(user).then(users => {
 /*
         bcrypt.compare(request.body.password, users.password).then((result) => {
@@ -54,7 +56,8 @@ userRouter.get('/login', (request, response, next) => {
 */
         if(request.body.password == users.password){
             
-            console.log('logged in' + users.password)
+            console.log('logged in ' + users.firstName)
+            response.json(users);
             next();
         }
         else

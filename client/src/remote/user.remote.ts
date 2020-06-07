@@ -9,3 +9,9 @@ export const getAllUsers = async () => {
         return user;
     });
 }
+
+export const login = async (logger: User) => {
+    const response = await internalAxios.post('/user/login', logger);
+    console.log(response);
+    return response.data.user;//Possible issue on return type
+}
