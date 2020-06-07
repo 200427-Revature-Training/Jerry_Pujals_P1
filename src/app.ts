@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { db } from './daos/db';
 import { peopleRouter } from './routers/people-router';
+import { userRouter } from './routers/user-router';
 
 const app = express();
 
@@ -13,7 +14,6 @@ app.set('port', port);
 app.use((request, response, next) => {
     response.setHeader('Access-Control-Allow-Origin', 'http://jerrypujalshomeapp.s3.us-east-2.amazonaws.com');
     response.setHeader('Access-Control-Allow-Headers', 'content-type')
-    // response.setHeader('Access-Control-Allow-Methods', 'GET POST');
     next();
 })
 
@@ -26,6 +26,9 @@ app.use(bodyParser.json());
     ? Router Registration
 */
 app.use('/people', peopleRouter);
+app.use('/user', userRouter);
+
+
 
 /*
     Listen for SIGINT signal - issued by closing the server with ctrl+c

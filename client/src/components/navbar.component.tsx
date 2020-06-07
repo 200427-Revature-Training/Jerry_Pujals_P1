@@ -22,12 +22,15 @@ const NavbarComponent: React.FC<RouteComponentProps> = (props) => {
 
     return (
         <nav className="navbar navbar-dark bg-primary">
-            <a className="navbar-brand" href="#">Bank of Money</a>
+            <a className="navbar-brand" href="#">ERS System</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
+                <li className="nav-item active">
+                        <Link to="/user">User {renderOnCurrentPath('/user') }</Link>
+                    </li>
                     <li className="nav-item active">
                         <Link to="/home">Home {renderOnCurrentPath('/home') }</Link>
                     </li>
@@ -37,6 +40,7 @@ const NavbarComponent: React.FC<RouteComponentProps> = (props) => {
                     <li className="nav-item">
                         <Link to="/loans">Loans {renderOnCurrentPath('/loans') }</Link>
                     </li>
+
                 </ul>
             </div>
         </nav>

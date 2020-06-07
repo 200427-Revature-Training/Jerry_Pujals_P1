@@ -136,48 +136,7 @@ export const AccountComponent: React.FC = () => {
                 </Modal.Footer>
             </Modal>
 
-            {/* Plain Bootstrap Components */}
-            {/* <div className="modal fade" id="add-user-modal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">New User</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            <form>
-                                <div className="form-group">
-                                    <label htmlFor="recipient-name" className="col-form-label">First Name:</label>
-                                    <input 
-                                        type="text" className="form-control" id="new-first-name" 
-                                        value={inputFirstName} onChange={(e) => setInputFirstName(e.target.value)}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="new-last-name" className="col-form-label">Last Name:</label>
-                                    <input 
-                                        type="text" className="form-control" id="new-last-name"
-                                        value={inputLastName} onChange={(e) => setInputLastName(e.target.value)} 
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="birthdate" className="col-form-label">Birth Date:</label>
-                                    <input 
-                                        type="date" className="form-control" id="new-birthdate" 
-                                        value={inputBirthdate} onChange={(e) => setInputBirthdate(e.target.value)}
-                                    />
-                                </div>
-                            </form>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" onClick={() => addUser()}>Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
+           
         </div>
     );
 }

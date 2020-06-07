@@ -5,6 +5,8 @@ import { AccountComponent } from './components/accounts.component';
 import { LoanComponent } from './components/loan.component';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { HomeComponent } from './components/home.component';
+import { UserComponent } from './components/user.component';
+
 
 function App() {
   return (
@@ -13,6 +15,9 @@ function App() {
         <NavbarComponent />
         <main>
           <Switch>
+            <Route path="/user">
+              <UserComponent />
+            </Route>
             <Route path="/home">
               <HomeComponent />
             </Route>
