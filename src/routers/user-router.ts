@@ -54,21 +54,31 @@ userRouter.post('/login', (request, response, next) => {
             
         });
 */
+/*
+if (!users) {
+    response.sendStatus(404);
+} else {
+    response.json(users);
+}
+next();
+*/
         if(request.body.password == users.password){
             
-            console.log('logged in ' + users.firstName)
+            console.log('logged in ' + users.firstName);
             response.json(users);
             next();
         }
         else
         {
             // send status that password was wrong
-            response.sendStatus(501);
+            response.sendStatus(500);
         }
 
     }).catch(err => {
+        console.log('here');
         console.log(err);
         response.sendStatus(500);
+        next();
     });
     
 });
