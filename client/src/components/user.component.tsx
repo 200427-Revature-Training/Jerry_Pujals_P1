@@ -5,12 +5,13 @@ import './user.component.css';
 import { Modal, Button, Form } from 'react-bootstrap';
 
 var loggedin = false;
+var userp;
 
 export const UserComponent: React.FC = () => {
     const [user, setUsers] = useState<User[]>([]);
     const [inputUserName, setInputUserName] = useState('');
     const [inputPassword, setInputPassword] = useState('');
-
+    const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(() => {
         login();
@@ -37,25 +38,32 @@ export const UserComponent: React.FC = () => {
 
         await userRemote.login(payload).then(user =>{
                 if(user){
-                    loggedin = true; 
+                   // loggedin = true; 
+                   userRemote.getAllUsers().then(user => {
+                    setUsers(user);
+                });   
                 }
         });
         //resets form boxes
         setInputUserName('');
         setInputPassword('');  
-             
-       // loadUser();
+        setModalVisible(false)
+        loadUser();
     }
 
 
 
-if(loggedin){
     return (
         <div>
             <header>
                 <h2 
-                id="user-header" className="dark">User Section                 
-                </h2>
+                id="user-header" className="dark">User Section     
+                <button 
+                        className="btn btn-success"
+                        onClick={() => setModalVisible(true)}
+                        >Login</button>
+                </h2>            
+                
             </header>
 
             <table className="table table-striped">
@@ -87,54 +95,33 @@ if(loggedin){
                 </tbody>
             </table>
 
-           
+            <Modal show={modalVisible} onHide={() => setModalVisible(false)}>
+                <Modal.Header>
+                    <Modal.Title>New User</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group>
+                            <Form.Label>User Name:</Form.Label>
+                            <Form.Control type="text" value={inputUserName} onChange={(e) => setInputUserName(e.target.value) } />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Password:</Form.Label>
+                            <Form.Control type="text" value={inputPassword} onChange={(e) => setInputPassword(e.target.value) } />
+                        </Form.Group>                      
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={() => setModalVisible(false)}>Close</Button>
+                    <Button onClick={() => login()}>Login</Button>
+                </Modal.Footer>
+            </Modal>
 
            
         </div>
     );
-                }
-    else{
-        return (
-            <div>
-                <header>
-                    <h2 
-                    id="user-header" className="dark">Login                 
-                    </h2>
-                </header>
-    
-                <section id="login-container">
-               <form>
-
-                <div>
-                    <label><div>User Name:</div>
-                    <input 
-                        value={inputUserName} 
-                        onChange={(e) => setInputUserName(e.target.value)} 
-                        type="text" />
-                    </label>
-                </div>
-
-                <div>
-                    <label><div>Password:</div>
-                    <input value={inputPassword} 
-                        onChange={(e) => setInputPassword(e.target.value)}
-                        type="text" />
-                    </label>
-                </div>
-
-            <div>
-                <button onClick={() => login()}>Log in</button>
-            </div>
-
-            </form>
-
-        </section>
-               
-    
-               
-            </div>
-        );
-    }
+   
+      
 
 
 }

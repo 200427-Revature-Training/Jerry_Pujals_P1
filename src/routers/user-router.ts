@@ -63,7 +63,7 @@ userRouter.post('/login', (request, response, next) => {
         else
         {
             // send status that password was wrong
-            response.sendStatus(500);
+            response.sendStatus(501);
         }
 
     }).catch(err => {

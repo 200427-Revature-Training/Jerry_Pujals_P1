@@ -5,3 +5,26 @@
     margin-bottom: 0;
 }
 
+#login-container {
+    text-align: center;
+}
+
+label {
+    display: flex;
+    margin: 3px;
+}
+
+label > div {
+    flex-grow: 1;
+    text-align: right;
+    padding: 0 10px;
+}
+
+label > input {
+    flex-grow: 0;
+    display: block;
+}
+
+button {
+    margin: 5px;
+}
