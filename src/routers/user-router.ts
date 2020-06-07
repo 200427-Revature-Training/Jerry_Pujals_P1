@@ -58,7 +58,7 @@ userRouter.post('/login', (request, response, next) => {
       
 
     }).catch(err => {
-        console.log(userService.login(user));
+        console.log(user);
         console.log(err);
         response.sendStatus(500);
         next();
