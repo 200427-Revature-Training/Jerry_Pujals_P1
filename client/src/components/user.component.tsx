@@ -74,6 +74,7 @@ export const UserComponent: React.FC = () => {
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Role ID</th>
                         
                     </tr>
                 </thead>
@@ -86,6 +87,7 @@ export const UserComponent: React.FC = () => {
                             <td>{u.firstName}</td>
                             <td>{u.lastName}</td>
                             <td>{u.email}</td>
+                            <td>{u.roleId}</td>
                             
                         </tr>)
                     })}
