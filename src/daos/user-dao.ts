@@ -26,4 +26,13 @@ export function getAllUsers(): Promise<User[]> {
         console.log(err);
         return undefined;
     });
+    
+}
+
+export function login(user: User): Promise<User> {
+   
+    const sql = 'SELECT * FROM users WHERE ers_username = $1 ';
+
+    return db.query<UserRow>(sql, [user.userName])
+        .then(result => result.rows.map(row => User.from(row))[0]);
 }
