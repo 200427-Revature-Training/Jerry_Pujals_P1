@@ -1,5 +1,6 @@
 import express from 'express';
 import * as userService from '../services/user-service';
+import { User } from '../models/User';
 
 export const userRouter = express.Router();
 const bcrypt = require('bcrypt');
@@ -22,7 +23,8 @@ userRouter.get('', async (request, response, next) => {
 userRouter.post('/login', (request, response, next) => {
 
     //Gets user object from request input
-    const user:any = {
+    const user:User = {
+        id: request.body.id,
         userName: request.body.userName,
         password: request.body.password,
         firstName: request.body.firstName,
