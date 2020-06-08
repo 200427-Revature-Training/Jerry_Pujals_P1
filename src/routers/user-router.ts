@@ -28,11 +28,18 @@ userRouter.post('/login', (request, response, next) => {
     //Sends input to userService.login and puts result into users var   
     userService.login(user)
         .then(reuser => {
+            if(reuser.password === user.password){
             response.status(201);
             response.json(reuser);
+            }
+            else{
+
+                console.log('Incorect user: '+user);
+                response.status(404);
+            }
+            
             next();
         }).catch(err => {
-            console.log(user);
             response.sendStatus(500);
             next();
         });
