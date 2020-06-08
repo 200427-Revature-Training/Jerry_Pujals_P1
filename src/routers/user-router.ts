@@ -74,7 +74,7 @@ userRouter.post('/login2', async (req, res) => {
       // 4. Store Refreshtoken with user in "db"
       // Could also use different version numbers instead.
       // Then just increase the version number on the revoke endpoint
-      user[].refreshtoken = refreshtoken;
+      user[0].refreshtoken = refreshtoken;
       // 5. Send token. Refreshtoken as a cookie and accesstoken as a regular response
       console.log('Acc Token '+accesstoken);
       sendRefreshToken(res, refreshtoken);
