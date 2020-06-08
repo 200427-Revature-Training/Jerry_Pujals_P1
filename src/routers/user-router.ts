@@ -28,7 +28,7 @@ userRouter.post('/login', (request, response, next) => {
     //Sends input to userService.login and puts result into users var   
     userService.login(user)
         .then(reuser => {
-            if(reuser.password === user.password){
+            if(reuser[0].password === user[0].password){
             response.status(200);
             response.json(reuser);
             }
