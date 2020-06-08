@@ -23,48 +23,19 @@ userRouter.get('', async (request, response, next) => {
 userRouter.post('/login', (request, response, next) => {
 
     //Gets user object from request input
-    const user:User = {
-        id: request.body.id,
-        userName: request.body.userName,
-        password: request.body.password,
-        firstName: request.body.firstName,
-        lastName: request.body.lastName,
-        email: request.body.email,
-        roleId: request.body.roleId
-        };
+    const user = request.body;
 
-    //Sends input to userService.login and puts result into users var    
-    userService.login(user).then(users => {
-/*
-        bcrypt.compare(request.body.password, users.password).then((result) => {
-           if(result)
-           {
-                response.json(users);
-                console.log("i am user - router = user =" + users);
-                if(users)
-                {
-                    console.log('i am a user now' + users.userName);
-                }
-                next();
-            }
-            else
-            {
-                // send status that password was wrong
-                response.sendStatus(500);
-            }
-
-            
+    //Sends input to userService.login and puts result into users var   
+    userService.login(user)
+        .then(reuser => {
+            response.status(201);
+            response.json(reuser);
+            next();
+        }).catch(err => {
+            console.log(user);
+            response.sendStatus(500);
+            next();
         });
-*/
-
-      
-
-    }).catch(err => {
-        console.log(user);
-        console.log(err);
-        response.sendStatus(500);
-        next();
-    });
     
 });
 

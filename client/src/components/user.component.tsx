@@ -27,7 +27,7 @@ export const UserComponent: React.FC = () => {
 
     const login = async () => {
         //
-        const payload = {
+        const payload: User = {
             id: 0,
             userName: inputUserName,
             password: inputPassword,

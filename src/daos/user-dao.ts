@@ -33,9 +33,9 @@ export function getAllUsers(): Promise<User[]> {
 //
 export function login(user: User): Promise<User> {
    
-    const sql = 'SELECT * FROM users WHERE ers_username = $2  AND ers_password = $3'; 
+    const sql = 'SELECT * FROM users WHERE ers_username = $1  AND ers_password = $2'; 
 
-    return db.query<UserRow>(sql, [user.userName])
+    return db.query<UserRow>(sql, [user.userName, user.password])
         .then(result => result.rows.map(row => User.from(row))[0]);
 
 }
