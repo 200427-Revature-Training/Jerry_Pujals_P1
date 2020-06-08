@@ -32,17 +32,13 @@ export function getAllUsers(): Promise<User[]> {
 
 //
 export function login(user: User): Promise<User[]> {
-   
+   //Select row based off of username and password then return a array with that row
     const sql = 'SELECT * FROM users WHERE ers_username = $1  AND ers_password = $2'; 
 
     return db.query<UserRow>(sql, [user.userName, user.password])
         .then(result => {
-            // 4. Extract rows from the query response
-            const rows: UserRow[] = result.rows;
-    
+            const rows: UserRow[] = result.rows;    
             console.log(rows);
-    
-            // 5. Convert row data format to Person objects
             const user: User[] = rows.map(row => User.from(row));
             return user;
         }).catch(err => {
