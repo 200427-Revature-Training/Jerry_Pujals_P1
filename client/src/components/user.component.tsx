@@ -37,7 +37,7 @@ export const UserComponent: React.FC = () => {
              roleId: 0
         };
 
-        userRemote.login2(payload).then(user =>{
+        userRemote.login(payload).then(user =>{
                 
                   
                     console.log(user);                
