@@ -31,7 +31,7 @@ export function getAllUsers(): Promise<User[]> {
 
 
 //
-export function login(user: User): Promise<User> {
+export function login(user: User): Promise<User[]> {
    
     const sql = 'SELECT * FROM users WHERE ers_username = $1  AND ers_password = $2'; 
 

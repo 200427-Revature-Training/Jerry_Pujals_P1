@@ -7,7 +7,7 @@ export function getAllUsers(): Promise<User[]> {
     return userDao.getAllUsers();
 }
 
-export function login(user: User): Promise<User>  {
+export function login(user: User): Promise<User[]>  {
    console.log('service user log: ' + user);
     return userDao.login(user);
 }
