@@ -63,7 +63,7 @@ userRouter.post('/login2', async (req, res) => {
   
     try {
       // 1. Find user in array. If not exist send error
-      const user[] =  userService.login(user);
+      const user =  userService.login(user1);
       if (!user) throw new Error('User does not exist');
       // 2. Compare crypted password and see if it checks out. Send error if not
       const valid = await compare(user1.password, user[0].password);
@@ -74,7 +74,7 @@ userRouter.post('/login2', async (req, res) => {
       // 4. Store Refreshtoken with user in "db"
       // Could also use different version numbers instead.
       // Then just increase the version number on the revoke endpoint
-      user.refreshtoken = refreshtoken;
+      user[].refreshtoken = refreshtoken;
       // 5. Send token. Refreshtoken as a cookie and accesstoken as a regular response
       console.log('Acc Token '+accesstoken);
       sendRefreshToken(res, refreshtoken);
