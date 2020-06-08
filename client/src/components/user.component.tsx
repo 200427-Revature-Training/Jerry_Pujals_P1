@@ -25,7 +25,7 @@ export const UserComponent: React.FC = () => {
         });        
     }
 
-    const login = async () => {
+    const login =  () => {
         //
         const payload: User = {
             id: 0,
@@ -37,19 +37,19 @@ export const UserComponent: React.FC = () => {
              roleId: 0
         };
 
-        await userRemote.login(payload).then(user =>{
-                if(user){
-                   // loggedin = true; 
-                   userRemote.getAllUsers().then(user => {
+        userRemote.login(payload).then(user =>{
+                
+                  
+                    console.log(user);                
                     setUsers(user);
-                });   
-                }
+             
+                
         });
         //resets form boxes
         setInputUserName('');
         setInputPassword('');  
         setModalVisible(false)
-        loadUser();
+       // loadUser();
     }
 
 
@@ -58,7 +58,7 @@ export const UserComponent: React.FC = () => {
         <div>
             <header>
                 <h2 
-                id="user-header" className="dark">User Section     
+                id="user-header" className="dark">User Section  
                 <button 
                         className="btn btn-success"
                         onClick={() => setModalVisible(true)}

@@ -29,7 +29,7 @@ userRouter.post('/login', (request, response, next) => {
     userService.login(user)
         .then(reuser => {
             if(reuser.password === user.password){
-            response.status(201);
+            response.status(200);
             response.json(reuser);
             }
             else{

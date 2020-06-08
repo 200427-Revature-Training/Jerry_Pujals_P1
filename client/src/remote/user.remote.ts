@@ -11,7 +11,10 @@ export const getAllUsers = async () => {
 }
 
 export const login = async (logger: User) => {
-    const response = await internalAxios.post('/user/login', logger);
+    const response = await internalAxios.post<User[]>('/user/login', logger);
     console.log(response);
-    return response.data.user;//Possible issue on return type
+    return response.data.map(user => {
+        return user;
+    });
+    //return response.data.user;//Possible issue on return type
 }
