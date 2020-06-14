@@ -26,12 +26,17 @@ export function filter(status: string): Promise<Ticket[]> {
    // const sql = 'SELECT * FROM reimbursement inner join reimbursement_status on reimbursement.reim_status_id= reimbursement_status.reim_status_id WHERE reim_status_id = $1';
     const sql = 'SELECT * FROM reimbursement inner join reimbursement_status on reimbursement.reim_status_id= reimbursement_status.reim_status_id WHERE reimbursement_status.reim_status = $1';
 
-    return db.query<TicketRow>(sql, [status])
-        .then(result => result.rows.map(row => Ticket.from(row))[0]).
-        catch(err => {
-            console.log(err);
-            return undefined;
-        });
+    return db.query<TicketRow>(sql, [status]).then(result => {
+      
+        const rows: TicketRow[] = result.rows;
+
+        console.log(rows);
+        const tickets: Ticket[] = rows.map(row => Ticket.from(row));
+        return tickets;
+    }).catch(err => {
+        console.log(err);
+        return undefined;
+    });
 }
 
 
