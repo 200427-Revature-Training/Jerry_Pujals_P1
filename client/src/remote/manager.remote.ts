@@ -27,21 +27,15 @@ export const getAllTickets = async () => {
 
 export const getUserById = async (number: Number | string | User) => {
 
-/*
-    const response = await internalAxios.get('/user', {
+
+    const response = await internalAxios.get<User[]>('/user', {
         params: {
-          ID: 12345
+          number
         }
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
       });
-      */
-    console.log('/user/:' + number.toString);
-    const response = await internalAxios.get<User[]>('/user/:' + number.toString);
+      
+   // console.log('/user/:' + number);
+   // const response = await internalAxios.get<User[]>('/user/:' + number);
     console.log(response);
     
     return response.data.map(tickets => {

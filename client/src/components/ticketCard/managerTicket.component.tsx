@@ -42,15 +42,17 @@ function setType(type:string | number){
     }
 
 }
+const [inputUser, setUser] = useState('');
 
 const getUser = (number: Number | string | User) => {
         
 
-  return  managerRemote.getUserById(number).then(user => {
-        return user[0].firstName.toString + " " + user[0].lastName.toString;
+    managerRemote.getUserById(number).then(user => {
+        setUser( user[0].firstName.toString + " " + user[0].lastName.toString);
+       
     });
 
-
+return inputUser;
 }
 
     return (
