@@ -1,5 +1,6 @@
 import { db } from '../daos/db';
-import { Ticket, TicketRow, StatusRow, Status } from '../models/Ticket';
+import { Ticket, TicketRow } from '../models/Ticket';
+import { StatusRow, Status } from '../models/Status';
 import { uptime } from 'process';
 
 
