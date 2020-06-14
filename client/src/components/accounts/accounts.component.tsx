@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import * as peopleRemote from '../remote/people.remote';
-import { Person } from '../models/Person';
+import * as peopleRemote from '../../remote/people.remote';
+import { Person } from '../../models/Person';
 import './accounts.component.css';
 import { Modal, Button, Form } from 'react-bootstrap';
 

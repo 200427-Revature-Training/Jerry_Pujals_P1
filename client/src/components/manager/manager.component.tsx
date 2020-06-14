@@ -1,0 +1,318 @@
+import React, { useState, useEffect } from 'react';
+import * as managerRemote from '../../remote/manager.remote';
+import { User } from '../../models/User';
+import './manager.component.css';
+import { Modal, Button, Form, Col, Row, Container } from 'react-bootstrap';
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
+import { ManagerTicket } from '../ticketCard/managerTicket.component';
+import { Ticket } from '../../models/Ticket';
+
+
+
+export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
+    const [ticket, setTickets] = useState<Ticket[]>([]);
+    const [inputID, setID] = useState(0);
+    const [inputAmmount, setAmmount] = useState(0);
+    const [inputDateRes, setDateRes] = useState('');
+    const [inputDateSub, setDateSub] = useState('');
+    const [inputUser, setUser] = useState('');
+    const [inputState, setState] = useState('');
+    const [inputType, setType] = useState('');
+
+
+    const [modalVisible, setModalVisible] = useState(false);
+
+    useEffect(() => {
+        submit();
+    }, [])
+
+    var u: User = {
+        id: 0,
+        userName: 'F',
+        password: 'U',
+        firstName: 'C',
+        lastName: 'C',
+        email: 'C',
+        roleId: 0
+    };
+    u = props.location.state as User;
+
+    // Submits a post request through ticket remote to edit a ticket
+    const submit = () => {
+
+
+        if (u) {
+            console.log("Manager report:" + u.firstName);
+        }
+        getAllTickets();
+
+    }
+
+    var t: Ticket[] = [{
+        reimbId: 1,
+        reimbAmount: 100,
+        reimbResolved: '10/10/10',
+        reimbSubmitted: '10/10/10',
+        reimbDescription: 'No',
+        reimbAuthor: u.firstName,
+        reimbResolver: 'dude',
+        reimbStatus: 'Pending',
+        reimbType: 'Travel'
+
+    }, {
+
+        reimbId: 2,
+        reimbAmount: 10,
+        reimbResolved: '11/10/10',
+        reimbSubmitted: '11/10/10',
+        reimbDescription: 'YESSSSSSSSSSSSSSSSSSSS',
+        reimbAuthor: u.firstName,
+        reimbResolver: 'dude',
+        reimbStatus: 'Resolved',
+        reimbType: 'Travel'
+    }, {
+        reimbId: 1,
+        reimbAmount: 100,
+        reimbResolved: '10/10/10',
+        reimbSubmitted: '10/10/10',
+        reimbDescription: 'No',
+        reimbAuthor: u.firstName,
+        reimbResolver: 'dude',
+        reimbStatus: 'Pending',
+        reimbType: 'Travel'
+
+    }, {
+
+        reimbId: 2,
+        reimbAmount: 10,
+        reimbResolved: '11/10/10',
+        reimbSubmitted: '11/10/10',
+        reimbDescription: 'YESSSSSSSSSSSSSSSSSSSS',
+        reimbAuthor: u.firstName,
+        reimbResolver: 'dude',
+        reimbStatus: 'Resolved',
+        reimbType: 'Travel'
+    }, {
+        reimbId: 1,
+        reimbAmount: 100,
+        reimbResolved: '10/10/10',
+        reimbSubmitted: '10/10/10',
+        reimbDescription: 'No',
+        reimbAuthor: u.firstName,
+        reimbResolver: 'dude',
+        reimbStatus: 'Pending',
+        reimbType: 'Travel'
+
+    }, {
+
+        reimbId: 2,
+        reimbAmount: 10,
+        reimbResolved: '11/10/10',
+        reimbSubmitted: '11/10/10',
+        reimbDescription: 'YESSSSSSSSSSSSSSSSSSSS',
+        reimbAuthor: u.firstName,
+        reimbResolver: 'dude',
+        reimbStatus: 'Resolved',
+        reimbType: 'Travel'
+    }, {
+        reimbId: 1,
+        reimbAmount: 100,
+        reimbResolved: '10/10/10',
+        reimbSubmitted: '10/10/10',
+        reimbDescription: 'No',
+        reimbAuthor: u.firstName,
+        reimbResolver: 'dude',
+        reimbStatus: 'Pending',
+        reimbType: 'Travel'
+
+    }, {
+
+        reimbId: 2,
+        reimbAmount: 10,
+        reimbResolved: '11/10/10',
+        reimbSubmitted: '11/10/10',
+        reimbDescription: 'YESSSSSSSSSSSSSSSSSSSS',
+        reimbAuthor: u.firstName,
+        reimbResolver: 'dude',
+        reimbStatus: 'Resolved',
+        reimbType: 'Travel'
+    }, {
+        reimbId: 1,
+        reimbAmount: 100,
+        reimbResolved: '10/10/10',
+        reimbSubmitted: '10/10/10',
+        reimbDescription: 'No',
+        reimbAuthor: u.firstName,
+        reimbResolver: 'dude',
+        reimbStatus: 'Pending',
+        reimbType: 'Travel'
+
+    }, {
+
+        reimbId: 2,
+        reimbAmount: 10,
+        reimbResolved: '11/10/10',
+        reimbSubmitted: '11/10/10',
+        reimbDescription: 'YESSSSSSSSSSSSSSSSSSSS',
+        reimbAuthor: u.firstName,
+        reimbResolver: 'dude',
+        reimbStatus: 'Resolved',
+        reimbType: 'Travel'
+    }];
+
+
+
+    // Creates a list of all tickets 
+    const renderManagerTicket = () => {
+        return t.map(ticket => {
+            return (<ManagerTicket key={ticket.reimbId} ticket={ticket}></ManagerTicket>)
+        })
+
+
+    }
+    const getAllTickets = () => {
+        return managerRemote.getAllTickets().then(ticket => {
+            t = ticket;
+            renderManagerTicket();
+
+        });
+    }
+
+    const filterTickets = (status: string) => {
+        return managerRemote.filterTickets(status).then(ticket => {
+            t = ticket;
+            renderManagerTicket();
+
+        });
+    }
+    const setStatus = (ticket: Ticket) => {
+        return managerRemote.changeStatus(ticket).then(ticket => {
+            t = ticket;
+            renderManagerTicket();
+
+        });
+    }
+
+    
+    /*
+        const renderManagerTickets = () => {
+            return managerRemote.getAllTickets().then(ticket => {
+                ticket.map(ticket => {
+                    return (<ManagerTicket key={ticket.reimbId} ticket={ticket}></ManagerTicket>)
+                }
+                )
+            });
+        }
+    */
+
+    return (
+
+        <div>
+            <header>
+                <h2
+                    id="user-header" className="dark">Manager
+                </h2>
+
+            </header>
+
+
+
+            <Row id="row">
+
+                <Col sm={4}>
+                    <div >
+
+                        <button
+                            className="btn btn-success"
+                            onClick={() => setModalVisible(true)}
+                        >Filter  Tickets</button>
+                    </div>
+                </Col>
+                <Col sm >
+
+                </Col>
+                <Col sm>
+
+                </Col>
+            </Row>
+
+            <section id="ticketContainer">
+                {getAllTickets()}
+            </section>
+
+            <Modal show={modalVisible} onHide={() => setModalVisible(false)}>
+                <Modal.Header>
+                    <Modal.Title>Filter Search</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group>
+                            <Form.Label>ID:</Form.Label>
+                            <Form.Control type="text" value={inputID} onChange={(e) => setID(parseInt(e.target.value))} />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Ammount:</Form.Label>
+                            <Form.Control type="text" value={inputAmmount} onChange={(e) => setAmmount(parseInt(e.target.value))} />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Date Submitted:</Form.Label>
+                            <Form.Control type="text" placeholder={"MM-DD-YEAR"} value={inputDateSub} onChange={(e) => setDateSub(e.target.value)} />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Date Resolved:</Form.Label>
+                            <Form.Control type="text" placeholder={"MM-DD-YEAR"} value={inputDateRes} onChange={(e) => setDateRes(e.target.value)} />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Emplyee:</Form.Label>
+                            <Form.Control type="text" value={inputUser} onChange={(e) => setUser(e.target.value)} />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Status:</Form.Label>
+                            <Form.Control as="select" value={inputState} onChange={(e) => setState(e.target.value)} >
+                                <option>Pending</option>
+                                <option>Approved</option>
+                                <option>Denied</option>
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Type:</Form.Label>
+                            <Form.Control as="select" value={inputType} onChange={(e) => setType(e.target.value)} >
+                                <option>Lodging</option>
+                                <option>Travel</option>
+                                <option>Food</option>
+                                <option>Other</option>
+                            </Form.Control>
+
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={() => setModalVisible(false)}>Close</Button>
+                    <Button onClick={() => filterTickets(inputState)}>Search</Button>
+                </Modal.Footer>
+            </Modal>
+
+
+        </div>
+    );
+
+
+
+
+}
+
+
+/*conditionally render the username of the user when logged in and otherwise render 'Login' when not logged in
+const MyComponent: React.FC = () => {
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [username, setUsername] = useState<string | null>(null);
+
+    return (
+        <div>
+            { loggedIn ? username : 'login' }
+        </div>
+    );
+
+
+*/
+export default withRouter(ManagerComponent);

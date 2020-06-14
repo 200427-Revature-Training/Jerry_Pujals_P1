@@ -1,0 +1,24 @@
+.ticket-card {
+    border: 2px ridge grey;
+    padding: 10px;
+    width: 900px;
+    margin: 10px;
+}
+
+.ticket-name {
+    font-weight: bold;
+
+}
+
+.muted {
+    font-size: 0.8em;
+    color: grey;
+}
+
+.inline-block-child {
+    display: inline-block;
+  }
+  
+.rem-des{
+
+}

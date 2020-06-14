@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import { db } from './daos/db';
 import { peopleRouter } from './routers/people-router';
 import { userRouter } from './routers/user-router';
+import { ticketRouter } from './routers/ticket-router';
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(bodyParser.json());
 */
 app.use('/people', peopleRouter);
 app.use('/user', userRouter);
+app.use('/ticket', ticketRouter);
 
 
 
