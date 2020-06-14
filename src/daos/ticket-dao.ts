@@ -29,7 +29,7 @@ export function getStatus(ticket: Ticket): Promise<string|number>{
         const rows: TicketRow[] = result.rows;
 
         const tickets: Ticket[] = rows.map(row => Ticket.from(row));
-       
+       console.log(tickets[0].reimbStatus);
         return  tickets[0].reimbStatus;
     }).catch(err => {
         console.log(err);
