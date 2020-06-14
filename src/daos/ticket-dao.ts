@@ -57,23 +57,24 @@ export function  filter  ( status: string): Promise<Ticket[]> {
 
         const tickets: Ticket[] = rows.map(row => { return Ticket.from(row)});
 
-        tickets.forEach(function(element) {
-            
 
-            
-            getStatus(element).then(result =>{
-               console.log("From GetStatus: ");
-               // console.log(result);
-                
 
-                element.reimbStatus = result;
-              
-                console.log("   ticket status: ");
+        for (let i = 0; i < tickets.length; i++){
+            getStatus(tickets[i]).then(result =>{
+                console.log("From GetStatus: ");
+                // console.log(result);
+                 
+ 
+                 tickets[i].reimbStatus = result;
+               
+                 console.log("   ticket status: ");
+ 
+                 console.log(tickets[i].reimbStatus);
+             });
+        }
 
-                console.log(tickets[0].reimbStatus);
-            });
 
-        });
+     
 
 
         console.log("From Tickets Array: ");
