@@ -62,7 +62,7 @@ export function  filter  ( status: string): Promise<Ticket[]> {
 
             
             getStatus(element).then(result =>{
-                console.log("From GetStatus: ");
+               console.log("From GetStatus: ");
                // console.log(result);
                 
 
@@ -75,7 +75,12 @@ export function  filter  ( status: string): Promise<Ticket[]> {
 
         });
         console.log("From Tickets Array: ");
+        console.log("ticket status: ");
         console.log(tickets[0].reimbStatus);
+        console.log("ticket: ");
+
+        console.log(tickets[0]);
+
         return tickets;
     }).catch(err => {
         console.log(err);
