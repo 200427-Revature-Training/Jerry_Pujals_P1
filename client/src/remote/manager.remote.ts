@@ -25,17 +25,13 @@ export const getAllTickets = async () => {
 }
 
 
-export const getUserById = async (number: Number | string | User) => {
+export const getUserById = async (number: number ) => {
 
   //  console.log();
 
 //console.log(number);
 
-    const response = await internalAxios.get<User[]>('/user/', {
-        params: {
-          number
-        }
-      });
+    const response = await internalAxios.post<User[]>('/user/id',  number);
       
    // console.log('/user/:' + number);
    // const response = await internalAxios.get<User[]>('/user/:' + number);
