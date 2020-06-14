@@ -30,7 +30,7 @@ userRouter.get('', async (request, response, next) => {
 
 
 userRouter.post('/id', (request, response, next) => {
-  const id = request.body;
+  const id = request.body.id;
   userService.getUserById(id).then(user => {
       if (!user) {
           response.sendStatus(404);
@@ -45,7 +45,6 @@ userRouter.post('/id', (request, response, next) => {
       next();
   })
 });
-
 
 
 userRouter.post('/login', (request, response, next) => {
@@ -76,6 +75,9 @@ userRouter.post('/login', (request, response, next) => {
         });
     
 });
+
+
+
 
 userRouter.post('/login2', async (req, res) => {
     const user1 = req.body;
