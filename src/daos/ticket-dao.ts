@@ -133,6 +133,18 @@ export function newTicket(upTicket: Ticket): Promise<Ticket[]> {
    
     const sql = `INSERT INTO reimbursement (reim_amount, reim_submitted, reim_desc, reim_author, reim_status_id, reim_type_id) VALUES($1,$2,$3,$4,$5,$6) RETURNING *`;
 
+    if(upTicket.reimbType == 'Lodging'){
+        upTicket.reimbType = 1;
+    }
+    else if(upTicket.reimbType == 'Travel'){
+        upTicket.reimbType = 2;
+    }
+    else if(upTicket.reimbType == 'Food'){
+        upTicket.reimbType = 3;
+    }
+    else if(upTicket.reimbType == 'Other'){
+        upTicket.reimbType = 4;
+    }
 
     const params = [upTicket.reimbAmount, upTicket.reimbSubmitted,upTicket.reimbDescription,upTicket.reimbAuthor,upTicket.reimbStatus,upTicket.reimbType];
 
