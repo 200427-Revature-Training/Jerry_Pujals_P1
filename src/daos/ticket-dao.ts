@@ -138,7 +138,7 @@ export function newTicket(upTicket: Ticket) {
 
     const params = [upTicket.reimbAmount, upTicket.reimbSubmitted,upTicket.reimbDescription,upTicket.reimbAuthor,upTicket.reimbStatus,upTicket.reimbType];
 
-     db.query<TicketRow>(sql, params)
+    return db.query<TicketRow>(sql, params)
         .then(result => result.rows.map(row => Ticket.from(row))[0]);
 }
 

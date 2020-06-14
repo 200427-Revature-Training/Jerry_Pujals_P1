@@ -21,7 +21,7 @@ export function filter(status: string): Promise<Ticket[]>  {
 
 export function newTicket(ticket: Ticket)  {
 
-     ticketDao.newTicket(ticket);
+    return ticketDao.newTicket(ticket);
 }
 
 export function setStatus(upTicket: Ticket): Promise<Ticket> {

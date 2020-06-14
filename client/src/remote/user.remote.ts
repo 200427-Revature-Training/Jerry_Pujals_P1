@@ -39,5 +39,5 @@ export const getResolver = async (id: number) => {
 export const makeNewTicket = async (ticket : Ticket) => {
     const response = await internalAxios.post<Ticket>('/ticket/newTicket', {ticket});
     console.log(response);
-  //  return response;
+    return response;
 }

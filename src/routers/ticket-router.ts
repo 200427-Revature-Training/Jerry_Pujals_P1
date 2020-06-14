@@ -54,8 +54,8 @@ ticketRouter.post('/newTicket', async (request, response, next) => {
     let ticket = request.body.ticket;
 
 console.log(ticket);
-ticketService.newTicket(ticket);
-/*
+//ticketService.newTicket(ticket);
+
     ticketService.newTicket(ticket)
     .then(reuser => {
         //console.log('Return from login: '+reuser[0]);
@@ -73,7 +73,7 @@ ticketService.newTicket(ticket);
         response.sendStatus(500);
         next();
     });
-*/
+
 });
 
 
