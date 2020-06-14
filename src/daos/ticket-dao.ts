@@ -1,5 +1,5 @@
 import { db } from '../daos/db';
-import { Ticket, TicketRow } from '../models/Ticket';
+import { Ticket, TicketRow, StatusRow, Status } from '../models/Ticket';
 import { uptime } from 'process';
 
 
@@ -22,15 +22,15 @@ export function getAllTickets(): Promise<Ticket[]> {
 
 export function getStatus(ticket: Ticket): Promise<string|number>{
     
-    const sql = 'SELECT * FROM reimbursement_status WHERE reimbursement_status.reim_status_id = $1';
+    const sql = 'SELECT reim_status FROM reimbursement_status WHERE reimbursement_status.reim_status_id = $1';
 
-    return db.query<TicketRow>(sql, [ticket.reimbStatus]).then(result => {
+    return db.query<StatusRow>(sql, [ticket.reimbStatus]).then(result => {
       
-        const rows: TicketRow[] = result.rows;
+        const rows: StatusRow[] = result.rows;
 
-        const tickets: Ticket[] = rows.map(row => Ticket.from(row));
+        const tickets: Status[] = rows.map(row => Status.from(row));
        console.log(tickets);
-        return  tickets[0].reimbStatus;
+        return  tickets[0].reim_status;
     }).catch(err => {
         console.log(err);
         return undefined;
