@@ -71,6 +71,7 @@ export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket }) =>
  }
  
          if (typeof num == 'number') {
+             
              managerRemote.getUserById(num).then(user => {
                 
  
