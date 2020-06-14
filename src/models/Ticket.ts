@@ -67,5 +67,11 @@ export class Status {
         );
         return status;
     }
+
+    constructor(reim_status: string) {
+        this.reim_status = reim_status;
+        
+
+    }
 }
 
