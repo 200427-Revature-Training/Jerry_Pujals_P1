@@ -29,7 +29,7 @@ export function getStatus(ticket: Ticket): Promise<string|number>{
         const rows: TicketRow[] = result.rows;
 
         const tickets: Ticket[] = rows.map(row => Ticket.from(row));
-       console.log(tickets[0].reimbStatus);
+       console.log(tickets);
         return  tickets[0].reimbStatus;
     }).catch(err => {
         console.log(err);
@@ -59,11 +59,13 @@ export function  filter  ( status: string): Promise<Ticket[]> {
 
             
             getStatus(element).then(result =>{
+                console.log(result);
+
                 element.reimbStatus = result;
             });
 
         });
-        console.log(tickets);
+       // console.log(tickets);
         return tickets;
     }).catch(err => {
         console.log(err);
