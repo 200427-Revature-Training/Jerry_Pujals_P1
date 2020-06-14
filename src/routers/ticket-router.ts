@@ -48,6 +48,35 @@ console.log(id);
 
 });
 
+ticketRouter.post('/newTicket', async (request, response, next) => {
+
+    //Gets status string from request input
+    let ticket = request.body.ticket;
+
+console.log(ticket);
+ticketService.newTicket(ticket);
+/*
+    ticketService.newTicket(ticket)
+    .then(reuser => {
+        //console.log('Return from login: '+reuser[0]);
+
+        if(reuser[0].reimbAuthor){
+        response.status(200);
+        response.json(reuser);
+        }
+        else{
+            response.status(404);
+        }
+        
+        next();
+    }).catch(err => {
+        response.sendStatus(500);
+        next();
+    });
+*/
+});
+
+
 ticketRouter.post('/filter', async (request, response, next) => {
 
     //Gets status string from request input

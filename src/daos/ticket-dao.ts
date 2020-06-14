@@ -128,7 +128,19 @@ export function setStatus(upTicket: Ticket): Promise<Ticket> {
 }
 
 
+export function newTicket(upTicket: Ticket) {
 
+   
+    const sql = `INSERT reimbursement
+    (reim_amount, reim_submitted, reim_desc, reim_author, reim_status_id, reim_type_id)
+    VALUES($1,$2,$3,$4,$5,$6) RETURNING *`;
+
+
+    const params = [upTicket.reimbAmount, upTicket.reimbSubmitted,upTicket.reimbDescription,upTicket.reimbAuthor,upTicket.reimbStatus,upTicket.reimbType];
+
+     db.query<TicketRow>(sql, params)
+        .then(result => result.rows.map(row => Ticket.from(row))[0]);
+}
 
 
 

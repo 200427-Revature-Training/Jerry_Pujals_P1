@@ -24,12 +24,20 @@ export const getAllTickets = async (id: number) => {
 
 
 
-export const getResolver = async (user: number) => {
+export const getResolver = async (id: number) => {
 
-    const response = await internalAxios.post<User[]>('/user/id', user);
+
+
+    const response = await internalAxios.post<User[]>('/user/id', {id});
     console.log(response);
-    return response.data.map(user => {
-        return user;
+    
+    return response.data.map(users => {
+        return users;
     });
-    //return response.data.user;//Possible issue on return type
+}
+
+export const makeNewTicket = async (ticket : Ticket) => {
+    const response = await internalAxios.post<Ticket>('/ticket/newTicket', {ticket});
+    console.log(response);
+  //  return response;
 }

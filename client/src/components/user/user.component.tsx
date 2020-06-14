@@ -12,9 +12,12 @@ import { Ticket } from '../../models/Ticket';
 export const UserComponent: React.FC<RouteComponentProps> = (props) => {
     const [user, setUsers] = useState<User[]>([]);
     const [ticketlist, setTickets] = useState<Ticket[]>([]);
-    const [inputUserName, setInputUserName] = useState('');
-    const [inputPassword, setInputPassword] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
+    const [inputAmmount, setAmmount] = useState(0);
+    const [inputType, setType] = useState('Lodging');
+    const [inputDesc, setDesc] = useState('Description');
+
+
 
     useEffect(() => {
         submit();
@@ -61,6 +64,7 @@ export const UserComponent: React.FC<RouteComponentProps> = (props) => {
     // Creates a list of all tickets 
     const renderUserTickets = (ticket: Ticket[]) => {
         
+       
 
         return ticket.map(ticket => {
             return (<UserTicket key={ticket.reimbId} ticket={ticket}></UserTicket>)
@@ -72,9 +76,27 @@ export const UserComponent: React.FC<RouteComponentProps> = (props) => {
 
         userRemote.getAllTickets(u.id).then(ticket => {
             setTickets(ticket);
-        });
-       
+        });   
+    }
+
+    const newTicket = () => {
+
+        var tup: Ticket = {
+            
+            reimbAmount: inputAmmount,            
+            reimbSubmitted: new Date(),
+            reimbDescription: inputDesc,
+            reimbAuthor: u.id,            
+            reimbStatus: 1,
+            reimbType: inputType
+    
+        };
+
+
+        userRemote.makeNewTicket(tup);
         
+        submit();
+
     }
 
     return (
@@ -120,11 +142,11 @@ export const UserComponent: React.FC<RouteComponentProps> = (props) => {
                     <Form>
                         <Form.Group>
                             <Form.Label>Ammount:</Form.Label>
-                            <Form.Control type="text" value={inputUserName} onChange={(e) => setInputUserName(e.target.value)} />
+                            <Form.Control type="text" value={inputAmmount} onChange={(e) => setAmmount(parseInt(e.target.value))} />
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Type:</Form.Label>
-                            <Form.Control as="select" value={inputPassword} onChange={(e) => setInputPassword(e.target.value)} >
+                            <Form.Control as="select" value={inputType} onChange={(e) => setType(e.target.value)} >
                                 <option>Lodging</option>
                                 <option>Travel</option>
                                 <option>Food</option>
@@ -133,14 +155,14 @@ export const UserComponent: React.FC<RouteComponentProps> = (props) => {
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Description:</Form.Label>
-                            <Form.Control as="textarea" rows={3} value={inputPassword} onChange={(e) => setInputPassword(e.target.value)} />
+                            <Form.Control as="textarea" rows={3} value={inputDesc} onChange={(e) => setDesc(e.target.value)} />
                         </Form.Group>
 
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={() => setModalVisible(false)}>Close</Button>
-                    <Button onClick={() => submit()}>Submit</Button>
+                    <Button onClick={() => newTicket()}>Submit</Button>
                 </Modal.Footer>
             </Modal>
 

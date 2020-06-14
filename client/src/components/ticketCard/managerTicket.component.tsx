@@ -75,7 +75,7 @@ export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket }) =>
              managerRemote.getUserById(num).then(user => {
                 
  
-                 setManager(user[num -1].firstName + " " + user[num-1].lastName);
+                 setManager(user[0].firstName + " " + user[0].lastName);
  
              });
          }

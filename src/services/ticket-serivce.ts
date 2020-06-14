@@ -19,6 +19,11 @@ export function filter(status: string): Promise<Ticket[]>  {
     return ticketDao.filter(status);
 }
 
+export function newTicket(ticket: Ticket)  {
+
+     ticketDao.newTicket(ticket);
+}
+
 export function setStatus(upTicket: Ticket): Promise<Ticket> {
 
     // We don't want to create Date(undefined) so check if input.birthdate
