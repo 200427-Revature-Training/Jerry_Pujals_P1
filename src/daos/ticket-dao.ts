@@ -145,7 +145,7 @@ export function newTicket(upTicket: Ticket): Promise<Ticket[]> {
     else if(upTicket.reimbType == 'Other'){
         upTicket.reimbType = 4;
     }
-
+    console.log(upTicket.reimbType);
     const params = [upTicket.reimbAmount, upTicket.reimbSubmitted,upTicket.reimbDescription,upTicket.reimbAuthor,upTicket.reimbStatus,upTicket.reimbType];
 
     return db.query<TicketRow>(sql, params).then(result => {
