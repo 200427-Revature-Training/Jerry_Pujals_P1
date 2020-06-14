@@ -26,7 +26,8 @@ ticketRouter.post('/filter', async (request, response, next) => {
 
     //Gets status string from request input
     let status = request.body;
-console.log(status);
+/*
+    console.log(status);
     try {
         const ticket = await ticketService.filter(status);
         response.json(ticket);
@@ -34,6 +35,24 @@ console.log(status);
         console.log(err);
         response.sendStatus(500);
     }
+*/
+    ticketService.filter(status)
+    .then(reuser => {
+        //console.log('Return from login: '+reuser[0]);
+
+        if(reuser[0].reimbStatus){
+        response.status(200);
+        response.json(reuser);
+        }
+        else{
+            response.status(404);
+        }
+        
+        next();
+    }).catch(err => {
+        response.sendStatus(500);
+        next();
+    });
 
 });
 

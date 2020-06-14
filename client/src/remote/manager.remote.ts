@@ -26,7 +26,7 @@ export const getAllTickets = async () => {
 export const filterTickets = async (status: string) => {
     console.log(status);
 
-    const response = await internalAxios.post<Ticket[]>('/ticket/filter', status);
+    const response = await internalAxios.post<Ticket[]>('/ticket/filter', {status});
     console.log(response);
 
 
