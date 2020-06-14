@@ -43,10 +43,13 @@ export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket }) =>
 
     }
     const [inputUser, setUser] = useState('');
+    const [inputManager, setManager] = useState('Unresolved');
+
 
     const getUser = (num: number | string | User ) => {
 
-        console.log(num);
+
+
         if (typeof num == 'number') {
             managerRemote.getUserById(num).then(user => {
                
@@ -61,6 +64,38 @@ export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket }) =>
 
         return inputUser;
     }
+    const getManager = (num: number | string | User | undefined) => {
+
+ if(!num){
+     return "Unresolved";
+ }
+ 
+         if (typeof num == 'number') {
+             managerRemote.getUserById(num).then(user => {
+                
+ 
+                 setManager(user[num -1].firstName + " " + user[num-1].lastName);
+ 
+             });
+         }
+         else {
+             setManager('Unresolved');
+         }
+ 
+         return inputManager;
+     }
+
+     const resolvedDate = (str: Date | string | undefined) => {
+
+        if(str == '' || !str){
+            return 'Unresolved';
+        }
+        else{
+            return str;
+        }
+     }
+   
+
 
     return (
         <div className="ticket-card">
@@ -69,9 +104,9 @@ export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket }) =>
                 <div className='child inline-block-child'><span className="muted"> Amount: </span>{ticket.reimbAmount}$ </div>
                 <div className='child inline-block-child'><span className="muted">&ensp; Type: </span>{setType(ticket.reimbType)}  </div>
                 <div className='child inline-block-child'><span className="muted">&ensp; Submitted: </span>{ticket.reimbSubmitted}</div>
-                <div className='child inline-block-child'><span className="muted">&ensp; Resolved: </span>{ticket.reimbResolved}</div>
+                <div className='child inline-block-child'><span className="muted">&ensp; Resolved Date: </span>{resolvedDate(ticket.reimbResolved)}</div>
                 <div className='child inline-block-child'><span className="muted">&ensp; Submitted By: </span>{getUser(ticket.reimbAuthor)}</div>
-                <div className='child inline-block-child'><span className="muted">&ensp; Approved By: </span>{ticket.reimbResolver}</div>
+                <div className='child inline-block-child'><span className="muted">&ensp; Approved By: </span>{ getManager(ticket.reimbResolver)}</div>
                 <div className='child inline-block-child'><span className="muted">&ensp; Status: </span>{setStatus(ticket.reimbStatus)}</div>
             </div>
 

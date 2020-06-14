@@ -31,7 +31,7 @@ export const getUserById = async (number: Number | string | User) => {
 
 //console.log(number);
 
-    const response = await internalAxios.get<User[]>('/user/number', {
+    const response = await internalAxios.get<User[]>('/user/', {
         params: {
           number
         }

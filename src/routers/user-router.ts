@@ -29,8 +29,8 @@ userRouter.get('', async (request, response, next) => {
 });
 
 
-userRouter.get('/:number', (request, response, next) => {
-  const id = +request.params.number;
+userRouter.post('/id', (request, response, next) => {
+  const id: number = request.body;
   userService.getUserById(id).then(user => {
       if (!user) {
           response.sendStatus(404);
