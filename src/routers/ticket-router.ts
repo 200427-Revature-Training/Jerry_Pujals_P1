@@ -22,7 +22,7 @@ ticketRouter.get('', async (request, response, next) => {
 });
 
 
-ticketRouter.get('/filter', async (request, response, next) => {
+ticketRouter.post('/filter', async (request, response, next) => {
 
     //Gets status string from request input
     const status = request.body;
