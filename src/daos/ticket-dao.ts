@@ -71,7 +71,7 @@ export function filter(status: string): Promise<Ticket[]> {
 
                 console.log(tickets[i].reimbStatus);
                 if (i = tickets.length - 1) {
-                    canreturn = true
+                  //  canreturn = true
                     return tickets;
                 }
             });
