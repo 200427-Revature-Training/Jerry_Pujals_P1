@@ -10,6 +10,20 @@ export const getAllUsers = async () => {
         return user;
     });
 }
+
+
+export const getAllTickets = async (id: number) => {
+    
+    const response = await internalAxios.post<Ticket[]>('/ticket/id', {id});
+    console.log(response);
+    
+    return response.data.map(tickets => {
+        return tickets;
+    });
+}
+
+
+
 export const getResolver = async (user: number) => {
 
     const response = await internalAxios.post<User[]>('/user/id', user);

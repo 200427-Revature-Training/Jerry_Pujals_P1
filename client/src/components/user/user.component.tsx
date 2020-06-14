@@ -11,6 +11,7 @@ import { Ticket } from '../../models/Ticket';
 
 export const UserComponent: React.FC<RouteComponentProps> = (props) => {
     const [user, setUsers] = useState<User[]>([]);
+    const [ticketlist, setTickets] = useState<Ticket[]>([]);
     const [inputUserName, setInputUserName] = useState('');
     const [inputPassword, setInputPassword] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
@@ -37,7 +38,9 @@ export const UserComponent: React.FC<RouteComponentProps> = (props) => {
         if (u) {
             console.log("User report:" + u.firstName);
         }
-        renderUserTickets();
+        getAllTickets();
+
+        renderUserTickets(ticketlist);
 
     }
     var t: Ticket[] = [{
@@ -48,7 +51,7 @@ export const UserComponent: React.FC<RouteComponentProps> = (props) => {
         reimbDescription: 'No',
         reimbAuthor: u.firstName,
         reimbResolver: 2,
-        reimbStatus: 'Pending',
+        reimbStatus: 1,
         reimbType: 'Travel'
 
     }];
@@ -56,14 +59,23 @@ export const UserComponent: React.FC<RouteComponentProps> = (props) => {
 
 
     // Creates a list of all tickets 
-    const renderUserTickets = () => {
-        return t.map(ticket => {
+    const renderUserTickets = (ticket: Ticket[]) => {
+        
+
+        return ticket.map(ticket => {
             return (<UserTicket key={ticket.reimbId} ticket={ticket}></UserTicket>)
         })
 
-       
-    }
 
+    }
+    const getAllTickets = () => {
+
+        userRemote.getAllTickets(u.id).then(ticket => {
+            setTickets(ticket);
+        });
+       
+        
+    }
 
     return (
 
@@ -97,7 +109,7 @@ export const UserComponent: React.FC<RouteComponentProps> = (props) => {
             </Row>
 
             <section id="ticketContainer">
-                {renderUserTickets()}
+                {renderUserTickets(ticketlist)}
             </section>
 
             <Modal show={modalVisible} onHide={() => setModalVisible(false)}>

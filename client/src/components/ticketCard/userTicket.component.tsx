@@ -54,12 +54,13 @@ export const UserTicket: React.FC<TicketCardComponentProps> = ({ ticket }) => {
  }
  
          if (typeof num == 'number') {
-             userRemote.getResolver(num).then(user => {
+           /*  userRemote.getResolver(num).then(user => {
                 
  
                  setManager(user[num -1].firstName + " " + user[num-1].lastName);
  
-             });
+             });*/
+             return 'not yet';
          }
          else {
              setManager('Unresolved');

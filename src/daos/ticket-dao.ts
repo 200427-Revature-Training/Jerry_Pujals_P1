@@ -20,6 +20,21 @@ export function getAllTickets(): Promise<Ticket[]> {
     });
 
 }
+export function getById(id: number): Promise<Ticket[]> {
+    const sql = 'SELECT * FROM reimbursement WHERE reim_author = $1 ORDER BY reim_id';
+    return db.query<TicketRow>(sql, [id]).then(result => {
+
+        const rows: TicketRow[] = result.rows;
+
+        console.log(rows);
+        const tickets: Ticket[] = rows.map(row => Ticket.from(row));
+        return tickets;
+    }).catch(err => {
+        console.log(err);
+        return undefined;
+    });
+
+}
 
 export function getStatus(ticket: Ticket): Promise<string> {
 

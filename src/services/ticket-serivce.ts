@@ -9,6 +9,10 @@ export function getAllTickets(): Promise<Ticket[]> {
 
 
 }
+export function getById(id: number): Promise<Ticket[]>  {
+
+    return ticketDao.getById(id);
+}
 
 export function filter(status: string): Promise<Ticket[]>  {
 

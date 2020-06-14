@@ -20,22 +20,39 @@ ticketRouter.get('', async (request, response, next) => {
     }
 
 });
+//Get array of tickets using user id
+ticketRouter.post('/id', async (request, response, next) => {
 
+    //Gets status string from request input
+    let id = request.body.id;
+
+console.log(id);
+
+    ticketService.getById(id)
+    .then(reuser => {
+        //console.log('Return from login: '+reuser[0]);
+
+        if(reuser[0].reimbAuthor){
+        response.status(200);
+        response.json(reuser);
+        }
+        else{
+            response.status(404);
+        }
+        
+        next();
+    }).catch(err => {
+        response.sendStatus(500);
+        next();
+    });
+
+});
 
 ticketRouter.post('/filter', async (request, response, next) => {
 
     //Gets status string from request input
     let status = request.body.status;
-/*
-    console.log(status);
-    try {
-        const ticket = await ticketService.filter(status);
-        response.json(ticket);
-    } catch (err) {
-        console.log(err);
-        response.sendStatus(500);
-    }
-*/
+
 console.log(status);
 
     ticketService.filter(status)
