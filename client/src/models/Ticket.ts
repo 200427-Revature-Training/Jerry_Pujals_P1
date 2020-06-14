@@ -10,6 +10,6 @@ export interface Ticket {
     //Note the security risk of returning users
     reimbAuthor: User | string | number;
     reimbResolver?: User | string | number;
-    reimbStatus: string | number;
-    reimbType: string | number;
+    reimbStatus: number | string;
+    reimbType: number | string;
 }

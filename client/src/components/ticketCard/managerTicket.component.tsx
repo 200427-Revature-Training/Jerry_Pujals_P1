@@ -11,6 +11,19 @@ interface TicketCardComponentProps {
 export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket }) => {
     const [approved, setApproved] = useState(false);
 
+function setStatus(stat:string | number){
+
+    if(stat == 1){
+        return 'Pending';
+    }
+    else if(stat == 2){
+        return 'Approved';
+    }
+    else if(stat == 3){
+        return 'Denied';
+    }
+
+}
     return (
         <div className="ticket-card">
             <div><span className="muted">Ticket ID: </span>{ticket.reimbId} </div>
@@ -21,7 +34,7 @@ export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket }) =>
                 <div className='child inline-block-child'><span className="muted">&ensp; Resolved: </span>{ticket.reimbResolved}</div>
                 <div className='child inline-block-child'><span className="muted">&ensp; Submitted By: </span>{ticket.reimbAuthor}</div>
                 <div className='child inline-block-child'><span className="muted">&ensp; Approved By: </span>{ticket.reimbResolver}</div>
-                <div className='child inline-block-child'><span className="muted">&ensp; Status: </span>{ticket.reimbStatus}</div>
+                <div className='child inline-block-child'><span className="muted">&ensp; Status: </span>{setStatus(ticket.reimbStatus)}</div>
             </div>
 
             <div className="rem-des"><span className="muted">Description: </span>{ticket.reimbDescription}</div>
@@ -33,3 +46,4 @@ export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket }) =>
         // </Form.Check>
     )
 }
+

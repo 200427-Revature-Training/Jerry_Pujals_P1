@@ -90,9 +90,9 @@ export function filter(status: string): Promise<Ticket[]> {
 
         console.log(tickets[0]);
 
-        if (canreturn) {
+    
             return tickets;
-        }
+        
     }).catch(err => {
         console.log(err);
         return undefined;

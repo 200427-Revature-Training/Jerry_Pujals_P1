@@ -90,6 +90,7 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
             setTickets(ticket);          
            
         });
+        
         renderManagerTicket(ticketlist);
 
     }
