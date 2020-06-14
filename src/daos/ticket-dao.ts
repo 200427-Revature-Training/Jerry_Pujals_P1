@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { db } from '../daos/db';
 import { Ticket, TicketRow } from '../models/Ticket';
 import { StatusRow, Status } from '../models/Status';
@@ -21,7 +22,7 @@ export function getAllTickets(): Promise<Ticket[]> {
     
 }
 
-export function getStatus(ticket: Ticket): Promise<string|number>{
+export function getStatus(ticket: Ticket): Promise<string>{
     
     const sql = 'SELECT reim_status FROM reimbursement_status WHERE reimbursement_status.reim_status_id = $1';
 
@@ -30,7 +31,9 @@ export function getStatus(ticket: Ticket): Promise<string|number>{
         const rows: StatusRow[] = result.rows;
 
         const tickets: Status[] = rows.map(row => Status.from(row));
-  
+        console.log("From in getStatus: ");
+        console.log(tickets[0].reim_status);
+
         return  tickets[0].reim_status;
     }).catch(err => {
         console.log(err);
@@ -47,25 +50,29 @@ export function  filter  ( status: string): Promise<Ticket[]> {
 
    // const sql = 'SELECT * FROM reimbursement inner join reimbursement_status on reimbursement.reim_status_id= reimbursement_status.reim_status_id WHERE reim_status_id = $1';
     const sql = 'SELECT * FROM reimbursement inner join reimbursement_status on reimbursement.reim_status_id= reimbursement_status.reim_status_id WHERE reimbursement_status.reim_status = $1';
+    const [tickets, setTickets] = useState<Ticket[]>([]);
 
     return db.query<TicketRow>(sql, [status]).then(result => {
       
         const rows: TicketRow[] = result.rows;
         
 
-       
-        const tickets: Ticket[] = rows.map(row => { return Ticket.from(row)});
+       setTickets(rows.map(row => { return Ticket.from(row)}));
+      //  const tickets: Ticket[] = rows.map(row => { return Ticket.from(row)});
+
         tickets.forEach(element  => {
             
 
             
             getStatus(element).then(result =>{
+                console.log("From GetStatus: ");
                 console.log(result);
 
                 element.reimbStatus = result;
             });
 
         });
+        console.log("From Tickets Array: ");
         console.log(tickets);
         return tickets;
     }).catch(err => {
