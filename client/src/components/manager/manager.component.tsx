@@ -196,7 +196,7 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={() => setModalVisible(false)}>Close</Button>
-                    <Button onClick={() => filterTickets(inputState)}>Search</Button>
+                    <Button onClick={() => filterTickets("Pending")}>Search</Button>
                 </Modal.Footer>
             </Modal>
 
