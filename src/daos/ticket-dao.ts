@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import { db } from '../daos/db';
 import { Ticket, TicketRow } from '../models/Ticket';
 import { StatusRow, Status } from '../models/Status';
@@ -50,15 +49,13 @@ export function  filter  ( status: string): Promise<Ticket[]> {
 
    // const sql = 'SELECT * FROM reimbursement inner join reimbursement_status on reimbursement.reim_status_id= reimbursement_status.reim_status_id WHERE reim_status_id = $1';
     const sql = 'SELECT * FROM reimbursement inner join reimbursement_status on reimbursement.reim_status_id= reimbursement_status.reim_status_id WHERE reimbursement_status.reim_status = $1';
-    const [tickets, setTickets] = useState<Ticket[]>([]);
 
     return db.query<TicketRow>(sql, [status]).then(result => {
       
         const rows: TicketRow[] = result.rows;
         
 
-       setTickets(rows.map(row => { return Ticket.from(row)}));
-      //  const tickets: Ticket[] = rows.map(row => { return Ticket.from(row)});
+        const tickets: Ticket[] = rows.map(row => { return Ticket.from(row)});
 
         tickets.forEach(element  => {
             
