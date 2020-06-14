@@ -17,8 +17,8 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
     const [inputDateRes, setDateRes] = useState('');
     const [inputDateSub, setDateSub] = useState('');
     const [inputUser, setUser] = useState('');
-    const [inputState, setState] = useState('');
-    const [inputType, setType] = useState('');
+    const [inputState, setState] = useState('Pending');
+    const [inputType, setType] = useState('Lodging');
 
 
     const [modalVisible, setModalVisible] = useState(false);
@@ -87,31 +87,22 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
 
     const filterTickets = (status: string) => {
         managerRemote.filterTickets(status).then(ticket => {
-            setTickets(ticket);
-            
-            submit();
+            setTickets(ticket);          
+           
         });
+        renderManagerTicket(ticketlist);
+
     }
     const setStatus = (ticket: Ticket) => {
          managerRemote.changeStatus(ticket)
            
          getAllTickets();
-         
+         submit();
 
         
     }
 
     
-    /*
-        const renderManagerTickets = () => {
-            return managerRemote.getAllTickets().then(ticket => {
-                ticket.map(ticket => {
-                    return (<ManagerTicket key={ticket.reimbId} ticket={ticket}></ManagerTicket>)
-                }
-                )
-            });
-        }
-    */
 
     return (
 
@@ -196,7 +187,7 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={() => setModalVisible(false)}>Close</Button>
-                    <Button onClick={() => filterTickets("Pending")}>Search</Button>
+                    <Button onClick={() => filterTickets(inputState)}>Search</Button>
                 </Modal.Footer>
             </Modal>
 
@@ -209,18 +200,4 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
 
 }
 
-
-/*conditionally render the username of the user when logged in and otherwise render 'Login' when not logged in
-const MyComponent: React.FC = () => {
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [username, setUsername] = useState<string | null>(null);
-
-    return (
-        <div>
-            { loggedIn ? username : 'login' }
-        </div>
-    );
-
-
-*/
 export default withRouter(ManagerComponent);
