@@ -13,47 +13,54 @@ interface TicketCardComponentProps {
 export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket }) => {
     const [approved, setApproved] = useState(false);
 
-function setStatus(stat:string | number){
+    function setStatus(stat: string | number) {
 
-    if(stat == 1){
-        return 'Pending';
-    }
-    else if(stat == 2){
-        return 'Approved';
-    }
-    else if(stat == 3){
-        return 'Denied';
-    }
+        if (stat == 1) {
+            return 'Pending';
+        }
+        else if (stat == 2) {
+            return 'Approved';
+        }
+        else if (stat == 3) {
+            return 'Denied';
+        }
 
-}
-function setType(type:string | number){
-
-    if(type == 1){
-        return 'Lodging';
     }
-    else if(type == 2){
-        return 'Travel';
+    function setType(type: string | number) {
+
+        if (type == 1) {
+            return 'Lodging';
+        }
+        else if (type == 2) {
+            return 'Travel';
+        }
+        else if (type == 3) {
+            return 'Food';
+        }
+        else if (type == 4) {
+            return 'Other';
+        }
+
     }
-    else if(type == 3){
-        return 'Food';
+    const [inputUser, setUser] = useState('');
+
+    const getUser = (num: number | string | User ) => {
+
+        console.log(num);
+        if (typeof num == 'number') {
+            managerRemote.getUserById(num).then(user => {
+               
+
+                setUser(user[num -1].firstName + " " + user[num-1].lastName);
+
+            });
+        }
+        else {
+            setUser('None');
+        }
+
+        return inputUser;
     }
-    else if(type == 4){
-        return 'Other';
-    }
-
-}
-const [inputUser, setUser] = useState('');
-
-const getUser = (number: Number | string | User) => {
-        
-
-    managerRemote.getUserById(number).then(user => {
-        setUser( user[0].firstName.toString + " " + user[0].lastName.toString);
-       
-    });
-
-return inputUser;
-}
 
     return (
         <div className="ticket-card">

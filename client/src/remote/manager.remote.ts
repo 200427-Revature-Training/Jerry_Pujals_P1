@@ -27,8 +27,11 @@ export const getAllTickets = async () => {
 
 export const getUserById = async (number: Number | string | User) => {
 
+  //  console.log();
 
-    const response = await internalAxios.get<User[]>('/user', {
+//console.log(number);
+
+    const response = await internalAxios.get<User[]>('/user/number', {
         params: {
           number
         }

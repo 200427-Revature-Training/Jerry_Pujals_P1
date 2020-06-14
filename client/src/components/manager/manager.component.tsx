@@ -57,7 +57,7 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
         reimbResolved: '10/10/10',
         reimbSubmitted: '10/10/10',
         reimbDescription: 'No',
-        reimbAuthor: u.firstName,
+        reimbAuthor: 'None',
         reimbResolver: 'dude',
         reimbStatus: 'Pending',
         reimbType: 'Travel'
