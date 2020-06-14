@@ -19,7 +19,7 @@ export function filter(status: string): Promise<Ticket[]>  {
     return ticketDao.filter(status);
 }
 
-export function newTicket(ticket: Ticket)  {
+export function newTicket(ticket: Ticket): Promise<Ticket[]>  {
 
     return ticketDao.newTicket(ticket);
 }

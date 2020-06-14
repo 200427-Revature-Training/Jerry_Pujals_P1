@@ -128,7 +128,7 @@ export function setStatus(upTicket: Ticket): Promise<Ticket> {
 }
 
 
-export function newTicket(upTicket: Ticket) {
+export function newTicket(upTicket: Ticket): Promise<Ticket[]> {
 
    
     const sql = `INSERT reimbursement
@@ -138,8 +138,17 @@ export function newTicket(upTicket: Ticket) {
 
     const params = [upTicket.reimbAmount, upTicket.reimbSubmitted,upTicket.reimbDescription,upTicket.reimbAuthor,upTicket.reimbStatus,upTicket.reimbType];
 
-    return db.query<TicketRow>(sql, params)
-        .then(result => result.rows.map(row => Ticket.from(row))[0]);
+    return db.query<TicketRow>(sql, params).then(result => {
+
+        const rows: TicketRow[] = result.rows;
+
+        console.log(rows);
+        const tickets: Ticket[] = rows.map(row => Ticket.from(row));
+        return tickets;
+    }).catch(err => {
+        console.log(err);
+        return undefined;
+    });
 }
 
 

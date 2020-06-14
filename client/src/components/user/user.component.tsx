@@ -91,11 +91,12 @@ export const UserComponent: React.FC<RouteComponentProps> = (props) => {
             reimbType: inputType
     
         };
+        userRemote.makeNewTicket(tup).then(ticket => {
+            setTickets(ticket);
+        });   
 
-
-        userRemote.makeNewTicket(tup);
+        renderUserTickets(ticketlist );
         
-        submit();
 
     }
 
