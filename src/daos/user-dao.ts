@@ -48,4 +48,10 @@ export function login(user: User): Promise<User[]> {
 
 }
 
+export function getUserById(id: number): Promise<User> {
 
+    const sql = 'SELECT * FROM users WHERE id = $1';
+
+    return db.query<UserRow>(sql, [id])
+        .then(result => result.rows.map(row => User.from(row))[0]);
+}

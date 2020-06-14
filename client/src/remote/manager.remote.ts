@@ -11,10 +11,37 @@ export const getAllUsers = async () => {
     });
 }
 
+
+
 //Returns ticket array for manager
 export const getAllTickets = async () => {
     
     const response = await internalAxios.get<Ticket[]>('/ticket');
+    console.log(response);
+    
+    return response.data.map(tickets => {
+        return tickets;
+    });
+}
+
+
+export const getUserById = async (number: Number | string | User) => {
+
+/*
+    const response = await internalAxios.get('/user', {
+        params: {
+          ID: 12345
+        }
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      */
+    console.log('/user/:' + number.toString);
+    const response = await internalAxios.get<User[]>('/user/:' + number.toString);
     console.log(response);
     
     return response.data.map(tickets => {

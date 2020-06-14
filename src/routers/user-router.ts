@@ -29,6 +29,25 @@ userRouter.get('', async (request, response, next) => {
 });
 
 
+userRouter.get('/:id', (request, response, next) => {
+  const id = +request.params.id;
+  userService.getUserById(id).then(user => {
+      if (!user) {
+          response.sendStatus(404);
+      } else {
+      let  u : User[] = [user];
+          response.json(u);
+      }
+      next();
+  }).catch(err => {
+      console.log(err);
+      response.sendStatus(500);
+      next();
+  })
+});
+
+
+
 userRouter.post('/login', (request, response, next) => {
 
     //Gets user object from request input
