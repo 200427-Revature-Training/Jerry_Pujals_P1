@@ -29,7 +29,7 @@ userRouter.get('', async (request, response, next) => {
 });
 
 
-userRouter.get('/number', (request, response, next) => {
+userRouter.get('/:number', (request, response, next) => {
   const id = +request.params.number;
   userService.getUserById(id).then(user => {
       if (!user) {
