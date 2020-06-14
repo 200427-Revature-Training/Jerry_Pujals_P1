@@ -30,8 +30,8 @@ export function getStatus(ticket: Ticket): Promise<string>{
         const rows: StatusRow[] = result.rows;
 
         const tickets: Status[] = rows.map(row => Status.from(row));
-        console.log("From in getStatus: ");
-        console.log(tickets[0].reim_status);
+        //console.log("From in getStatus: ");
+       // console.log(tickets[0].reim_status);
 
         return  tickets[0].reim_status;
     }).catch(err => {
@@ -67,9 +67,7 @@ export function  filter  ( status: string): Promise<Ticket[]> {
                 
 
                 element.reimbStatus = result;
-                console.log("   element status: ");
-
-                console.log(element.reimbStatus);
+              
                 console.log("   ticket status: ");
 
                 console.log(tickets[0].reimbStatus);
@@ -77,7 +75,7 @@ export function  filter  ( status: string): Promise<Ticket[]> {
 
         });
         console.log("From Tickets Array: ");
-        console.log(tickets);
+        console.log(tickets[0].reimbStatus);
         return tickets;
     }).catch(err => {
         console.log(err);
