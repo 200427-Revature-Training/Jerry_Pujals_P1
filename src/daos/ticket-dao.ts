@@ -57,7 +57,7 @@ export function  filter  ( status: string): Promise<Ticket[]> {
 
         const tickets: Ticket[] = rows.map(row => { return Ticket.from(row)});
 
-        tickets.forEach(element  => {
+        tickets.forEach(function(element) {
             
 
             
@@ -74,6 +74,8 @@ export function  filter  ( status: string): Promise<Ticket[]> {
             });
 
         });
+
+
         console.log("From Tickets Array: ");
         console.log("ticket status: ");
         console.log(tickets[0].reimbStatus);
