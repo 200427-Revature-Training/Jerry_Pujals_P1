@@ -24,9 +24,9 @@ export const getAllTickets = async () => {
 
 //Returns tickets with matching status string
 export const filterTickets = async (status: string) => {
-    const response = await internalAxios.get<Ticket[]>('/ticket/filter', {params: {
-        status
-      }});
+    console.log(status);
+
+    const response = await internalAxios.post<Ticket[]>('/ticket/filter', status);
     console.log(response);
 
 
