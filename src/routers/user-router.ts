@@ -30,7 +30,7 @@ userRouter.get('', async (request, response, next) => {
 
 
 userRouter.post('/id', (request, response, next) => {
-  const id: number = request.body;
+  const id = request.body;
   console.log(id);
   userService.getUserById(id).then(user => {
       if (!user) {
