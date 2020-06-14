@@ -52,7 +52,7 @@ export function  filter  ( status: string): Promise<Ticket[]> {
         const rows: TicketRow[] = result.rows;
         
 
-        console.log(rows);
+       
         const tickets: Ticket[] = rows.map(row => { return Ticket.from(row)});
         tickets.forEach(element  => {
             
@@ -63,6 +63,7 @@ export function  filter  ( status: string): Promise<Ticket[]> {
             });
 
         });
+        console.log(tickets);
         return tickets;
     }).catch(err => {
         console.log(err);
