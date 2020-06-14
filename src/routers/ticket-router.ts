@@ -36,6 +36,8 @@ ticketRouter.post('/filter', async (request, response, next) => {
         response.sendStatus(500);
     }
 */
+console.log(status);
+
     ticketService.filter(status)
     .then(reuser => {
         //console.log('Return from login: '+reuser[0]);
