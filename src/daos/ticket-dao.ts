@@ -23,7 +23,8 @@ export function getAllTickets(): Promise<Ticket[]> {
 
 export function filter(status: string): Promise<Ticket[]> {
 
-    const sql = 'SELECT * FROM reimbursement inner join reimbursement_status on reimbursement.reim_status_id= reimbursement_status.reim_status_id WHERE reim_status_id = $1';
+   // const sql = 'SELECT * FROM reimbursement inner join reimbursement_status on reimbursement.reim_status_id= reimbursement_status.reim_status_id WHERE reim_status_id = $1';
+    const sql = 'SELECT * FROM reimbursement inner join reimbursement_status on reimbursement.reim_status_id= reimbursement_status.reim_status_id';
 
     return db.query<TicketRow>(sql, [status])
         .then(result => result.rows.map(row => Ticket.from(row))[0]).

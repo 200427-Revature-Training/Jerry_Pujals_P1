@@ -38,7 +38,7 @@ ticketRouter.get('/filter', async (request, response, next) => {
 });
 
 
-ticketRouter.post('/setStatus', (request, response, next) => {
+ticketRouter.patch('/setStatus', (request, response, next) => {
     const upTicket = request.body;
     ticketService.setStatus(upTicket)
         .then(updatedTicket => {

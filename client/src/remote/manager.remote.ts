@@ -13,8 +13,10 @@ export const getAllUsers = async () => {
 
 //Returns ticket array for manager
 export const getAllTickets = async () => {
+    
     const response = await internalAxios.get<Ticket[]>('/ticket');
     console.log(response);
+    
     return response.data.map(tickets => {
         return tickets;
     });
@@ -24,6 +26,8 @@ export const getAllTickets = async () => {
 export const filterTickets = async (status: string) => {
     const response = await internalAxios.post<Ticket[]>('/ticket/filter', status);
     console.log(response);
+
+
     return response.data.map(tickets => {
         return tickets;
     });
@@ -31,7 +35,7 @@ export const filterTickets = async (status: string) => {
 }
 
 export const changeStatus = async (ticket : Ticket) => {
-    const response = await internalAxios.post<Ticket>('/ticket/setStatus', status);
+    const response = await internalAxios.patch<Ticket>('/ticket/setStatus', ticket);
     console.log(response);
     return response;
 }

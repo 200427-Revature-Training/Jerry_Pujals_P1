@@ -6,11 +6,12 @@ import { Modal, Button, Form, Col, Row, Container } from 'react-bootstrap';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import { ManagerTicket } from '../ticketCard/managerTicket.component';
 import { Ticket } from '../../models/Ticket';
+import * as peopleRemote from '../../remote/people.remote';
 
 
 
 export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
-    const [ticket, setTickets] = useState<Ticket[]>([]);
+    const [ticketlist, setTickets] = useState<Ticket[]>([]);
     const [inputID, setID] = useState(0);
     const [inputAmmount, setAmmount] = useState(0);
     const [inputDateRes, setDateRes] = useState('');
@@ -45,11 +46,13 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
             console.log("Manager report:" + u.firstName);
         }
         getAllTickets();
+        renderManagerTicket(ticketlist);
+       //
 
     }
 
     var t: Ticket[] = [{
-        reimbId: 1,
+        reimbId: 0,
         reimbAmount: 100,
         reimbResolved: '10/10/10',
         reimbSubmitted: '10/10/10',
@@ -59,138 +62,43 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
         reimbStatus: 'Pending',
         reimbType: 'Travel'
 
-    }, {
-
-        reimbId: 2,
-        reimbAmount: 10,
-        reimbResolved: '11/10/10',
-        reimbSubmitted: '11/10/10',
-        reimbDescription: 'YESSSSSSSSSSSSSSSSSSSS',
-        reimbAuthor: u.firstName,
-        reimbResolver: 'dude',
-        reimbStatus: 'Resolved',
-        reimbType: 'Travel'
-    }, {
-        reimbId: 1,
-        reimbAmount: 100,
-        reimbResolved: '10/10/10',
-        reimbSubmitted: '10/10/10',
-        reimbDescription: 'No',
-        reimbAuthor: u.firstName,
-        reimbResolver: 'dude',
-        reimbStatus: 'Pending',
-        reimbType: 'Travel'
-
-    }, {
-
-        reimbId: 2,
-        reimbAmount: 10,
-        reimbResolved: '11/10/10',
-        reimbSubmitted: '11/10/10',
-        reimbDescription: 'YESSSSSSSSSSSSSSSSSSSS',
-        reimbAuthor: u.firstName,
-        reimbResolver: 'dude',
-        reimbStatus: 'Resolved',
-        reimbType: 'Travel'
-    }, {
-        reimbId: 1,
-        reimbAmount: 100,
-        reimbResolved: '10/10/10',
-        reimbSubmitted: '10/10/10',
-        reimbDescription: 'No',
-        reimbAuthor: u.firstName,
-        reimbResolver: 'dude',
-        reimbStatus: 'Pending',
-        reimbType: 'Travel'
-
-    }, {
-
-        reimbId: 2,
-        reimbAmount: 10,
-        reimbResolved: '11/10/10',
-        reimbSubmitted: '11/10/10',
-        reimbDescription: 'YESSSSSSSSSSSSSSSSSSSS',
-        reimbAuthor: u.firstName,
-        reimbResolver: 'dude',
-        reimbStatus: 'Resolved',
-        reimbType: 'Travel'
-    }, {
-        reimbId: 1,
-        reimbAmount: 100,
-        reimbResolved: '10/10/10',
-        reimbSubmitted: '10/10/10',
-        reimbDescription: 'No',
-        reimbAuthor: u.firstName,
-        reimbResolver: 'dude',
-        reimbStatus: 'Pending',
-        reimbType: 'Travel'
-
-    }, {
-
-        reimbId: 2,
-        reimbAmount: 10,
-        reimbResolved: '11/10/10',
-        reimbSubmitted: '11/10/10',
-        reimbDescription: 'YESSSSSSSSSSSSSSSSSSSS',
-        reimbAuthor: u.firstName,
-        reimbResolver: 'dude',
-        reimbStatus: 'Resolved',
-        reimbType: 'Travel'
-    }, {
-        reimbId: 1,
-        reimbAmount: 100,
-        reimbResolved: '10/10/10',
-        reimbSubmitted: '10/10/10',
-        reimbDescription: 'No',
-        reimbAuthor: u.firstName,
-        reimbResolver: 'dude',
-        reimbStatus: 'Pending',
-        reimbType: 'Travel'
-
-    }, {
-
-        reimbId: 2,
-        reimbAmount: 10,
-        reimbResolved: '11/10/10',
-        reimbSubmitted: '11/10/10',
-        reimbDescription: 'YESSSSSSSSSSSSSSSSSSSS',
-        reimbAuthor: u.firstName,
-        reimbResolver: 'dude',
-        reimbStatus: 'Resolved',
-        reimbType: 'Travel'
     }];
 
 
 
     // Creates a list of all tickets 
-    const renderManagerTicket = () => {
-        return t.map(ticket => {
+    const renderManagerTicket = (ticket: Ticket[]) => {
+        
+
+        return ticket.map(ticket => {
             return (<ManagerTicket key={ticket.reimbId} ticket={ticket}></ManagerTicket>)
         })
 
 
     }
     const getAllTickets = () => {
-        return managerRemote.getAllTickets().then(ticket => {
-            t = ticket;
-            renderManagerTicket();
 
+        managerRemote.getAllTickets().then(ticket => {
+            setTickets(ticket);
         });
+       
+        
     }
 
     const filterTickets = (status: string) => {
-        return managerRemote.filterTickets(status).then(ticket => {
-            t = ticket;
-            renderManagerTicket();
-
+        managerRemote.filterTickets(status).then(ticket => {
+            setTickets(ticket);
+            
+            submit();
         });
     }
     const setStatus = (ticket: Ticket) => {
-        return managerRemote.changeStatus(ticket).then(ticket => {
-            t = ticket;
-            renderManagerTicket();
+         managerRemote.changeStatus(ticket)
+           
+         getAllTickets();
+         
 
-        });
+        
     }
 
     
@@ -237,7 +145,7 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
             </Row>
 
             <section id="ticketContainer">
-                {getAllTickets()}
+                {renderManagerTicket(ticketlist)}
             </section>
 
             <Modal show={modalVisible} onHide={() => setModalVisible(false)}>
