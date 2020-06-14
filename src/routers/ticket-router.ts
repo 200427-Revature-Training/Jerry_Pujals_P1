@@ -25,7 +25,7 @@ ticketRouter.get('', async (request, response, next) => {
 ticketRouter.post('/filter', async (request, response, next) => {
 
     //Gets status string from request input
-    let status = request.body;
+    let status = request.body.status;
 /*
     console.log(status);
     try {
