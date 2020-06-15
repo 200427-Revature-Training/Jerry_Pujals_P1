@@ -32,7 +32,7 @@ ticketRouter.post('/id', async (request, response, next) => {
         .then(reuser => {
             //console.log('Return from login: '+reuser[0]);
 
-            if (reuser[0].reimbAuthor) {
+            if (reuser) {
                 response.status(200);
                 response.json(reuser);
             }
