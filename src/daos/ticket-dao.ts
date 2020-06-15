@@ -167,16 +167,30 @@ export function setStatus(upTicket: Ticket): Promise<Ticket[]> {
     });
     let num: number = 0;
     if (typeof upTicket.reimbAuthor == 'number') {
-        num = upTicket.reimbAuthor;
+        num = upTicket.reimbId;
     }
 
-    return getById(num);
+    return getByTicketId(num);
 
 
 }
 
 
+export function getByTicketId(id: number): Promise<Ticket[]> {
+    const sql = 'SELECT * FROM reimbursement WHERE reim_id = $1 ORDER BY reim_id';
+    return db.query<TicketRow>(sql, [id]).then(result => {
 
+        const rows: TicketRow[] = result.rows;
+
+        console.log(rows);
+        const tickets: Ticket[] = rows.map(row => Ticket.from(row));
+        return tickets;
+    }).catch(err => {
+        console.log(err);
+        return undefined;
+    });
+
+}
 
 
 
