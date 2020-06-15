@@ -54,7 +54,7 @@ export const filterTickets = async (status: string) => {
 }
 
 export const changeStatus = async (ticket : Ticket) => {
-    const response = await internalAxios.patch<Ticket[]>('/ticket/setStatus', {ticket});
+    const response = await internalAxios.post<Ticket[]>('/ticket/setStatus', {ticket});
     console.log(response);
     return response.data.map(tickets => {
         return tickets;

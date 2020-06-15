@@ -105,7 +105,7 @@ console.log(status);
 });
 
 
-ticketRouter.patch('/setStatus', (request, response, next) => {
+ticketRouter.post('/setStatus', (request, response, next) => {
     let upTicket = request.body.ticket;
     ticketService.setStatus(upTicket)
     .then(reuser => {
