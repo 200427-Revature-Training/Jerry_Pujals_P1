@@ -127,7 +127,10 @@ export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket, Mana
 
             <div className="rem-des"><span className="muted">Description: </span>{ticket.reimbDescription}</div>
             <label>    <input type="checkbox" onChange={() =>  changeStatusToApproved (ticket)} />
-            Check Me!
+            Approve
+            </label>
+            <label>    <input type="checkbox" onChange={() =>  changeStatusToDenied (ticket)} />
+            Deny
             </label>
         </div>
 

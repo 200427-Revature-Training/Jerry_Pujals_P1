@@ -153,7 +153,7 @@ export function setStatus(upTicket: Ticket): Promise<Ticket[]> {
 //UPDATE reimbursement SET reim_status_id = COALESCE($1, reim_status_id) WHERE reim_id = $2 RETURNING *
     const sql = `UPDATE reimbursement
     SET reim_resolved=$1, reim_resolver=$2, reim_status_id=$3
-    WHERE reim_id=$4`;
+    WHERE reim_id=$4 RETURNING *`;
 
     const params = [upTicket.reimbResolved, upTicket.reimbResolver, upTicket.reimbStatus, upTicket.reimbId];
 
