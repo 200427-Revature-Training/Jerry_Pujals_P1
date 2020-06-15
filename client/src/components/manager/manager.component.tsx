@@ -151,26 +151,7 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group>
-                            <Form.Label>ID:</Form.Label>
-                            <Form.Control type="text" value={inputID} onChange={(e) => setID(parseInt(e.target.value))} />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Ammount:</Form.Label>
-                            <Form.Control type="text" value={inputAmmount} onChange={(e) => setAmmount(parseInt(e.target.value))} />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Date Submitted:</Form.Label>
-                            <Form.Control type="text" placeholder={"MM-DD-YEAR"} value={inputDateSub} onChange={(e) => setDateSub(e.target.value)} />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Date Resolved:</Form.Label>
-                            <Form.Control type="text" placeholder={"MM-DD-YEAR"} value={inputDateRes} onChange={(e) => setDateRes(e.target.value)} />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Emplyee:</Form.Label>
-                            <Form.Control type="text" value={inputUser} onChange={(e) => setUser(e.target.value)} />
-                        </Form.Group>
+                        
                         <Form.Group>
                             <Form.Label>Status:</Form.Label>
                             <Form.Control as="select" value={inputState} onChange={(e) => setState(e.target.value)} >
@@ -179,16 +160,7 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
                                 <option>Denied</option>
                             </Form.Control>
                         </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Type:</Form.Label>
-                            <Form.Control as="select" value={inputType} onChange={(e) => setType(e.target.value)} >
-                                <option>Lodging</option>
-                                <option>Travel</option>
-                                <option>Food</option>
-                                <option>Other</option>
-                            </Form.Control>
-
-                        </Form.Group>
+                        
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>

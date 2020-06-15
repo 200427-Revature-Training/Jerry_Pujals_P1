@@ -7,7 +7,6 @@ export class Ticket {
     reimbSubmitted: Date | string;
     reimbResolved?: Date | string;
     reimbDescription: string;
-    //Note the security risk of returning users
     reimbAuthor: User | string | number;
     reimbResolver?: User | string | number;
     reimbStatus: string | number;

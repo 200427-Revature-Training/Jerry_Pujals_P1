@@ -24,9 +24,10 @@ userRouter.post('/id', (request, response, next) => {
   const id = request.body.id;
   userService.getUserById(id).then(user => {
       if (!user) {
-          response.sendStatus(404);
+      //    response.sendStatus(404);
       } else {
       let  u : User[] = [user];
+  //    response.sendStatus(200);
           response.json(u);
       }
       next();
@@ -60,7 +61,8 @@ userRouter.post('/login', (request, response, next) => {
             
             next();
         }).catch(err => {
-            console.log('Error catcher. Input was: '+ [user]);
+           // console.log('Error catcher. Input was: '+ [user]);
+           console.log(user);
             response.sendStatus(500);
             next();
         });

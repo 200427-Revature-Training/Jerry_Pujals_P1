@@ -3,6 +3,8 @@ import bodyParser from 'body-parser';
 import { userRouter } from '../../src/routers/user-router';
 import * as userService from '../../src/services/user-service';
 import request from 'supertest';
+import { User } from '../../src/models/User';
+
 
 // Setup mock for peopleService dependency
 jest.mock('../../src/services/user-service');
@@ -16,16 +18,16 @@ app.use('/user', userRouter);
 
 
 describe('POST /user/id', () => {
-    test('Successful creation should return 201 status', async () => {
+    test('Successful creation should return 200 status', async () => {
         mockUserService.getUserById.mockImplementation(async () => ({}));
         const payload = {
             id: 1
         };
 
         await request(app)
-            .post('/user')
+            .post('/user/id')
             .send(payload)
-            .expect(201)
+            .expect(200)
             .expect('content-type', 'application/json; charset=utf-8')
     });
 
@@ -37,47 +39,46 @@ describe('POST /user/id', () => {
         };
 
         await request(app)
-            .post('/user')
+            .post('/user/id')
             .send(payload)
             .expect(500);
     });
 });
 
 describe('POST /user/login', () => {
-    test('Successful creation should return 201 status', async () => {
+    /*
+    test('Successful login should return 200 status', async () => {
         mockUserService.login.mockImplementation(async () => ({}));
-        const payload = {
+        
+      let user: User = {
             id: 0,
             userName: 'Dude1911',
             password: '12345',
-            firstName: '',
-            lastName: '',
+            firstName: 'guy',
+            lastName: 'pal',
             email: '',
             roleId: 0
         };
 
+        const payload = user;
+
         await request(app)
-            .post('/user')
+            .post('/user/login')
             .send(payload)
-            .expect(201)
+            .expect(200)
             .expect('content-type', 'application/json; charset=utf-8')
     });
-
+*/
     test('Should return 500 when encountering an error', async () => {
         mockUserService.login.mockImplementation(async () => { throw new Error() });
 
+        
         const payload = {
-            id: 0,
-            userName: 'Dude1911',
-            password: '12345',
-            firstName: '',
-            lastName: '',
-            email: '',
-            roleId: 0
+            
         };
 
         await request(app)
-            .post('/user')
+            .post('/user/login')
             .send(payload)
             .expect(500);
     });

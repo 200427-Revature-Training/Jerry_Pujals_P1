@@ -18,6 +18,7 @@ export function newTicket(ticket: Ticket): Promise<Ticket[]>  {
 }
 
 export function setStatus(upTicket: Ticket): Promise<Ticket[]> {
+
     if(upTicket.reimbStatus == 'Pending'){
         upTicket.reimbStatus = 1;
     }
@@ -28,5 +29,10 @@ export function setStatus(upTicket: Ticket): Promise<Ticket[]> {
         upTicket.reimbStatus = 3;
     }   
 
+if(upTicket.reimbStatus){
     return ticketDao.setStatus(upTicket);
+}
+else{
+    return new Promise((resolve, reject) => reject(422));
+}
 }

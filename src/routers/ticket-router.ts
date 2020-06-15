@@ -61,7 +61,7 @@ ticketRouter.post('/newTicket', async (request, response, next) => {
             //console.log('Return from login: '+reuser[0]);
 
             if (reuser[0].reimbAuthor) {
-                response.status(200);
+                response.status(201);
                 response.json(reuser);
             }
             else {
