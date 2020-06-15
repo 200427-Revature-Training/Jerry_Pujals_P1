@@ -1,5 +1,5 @@
 import express from 'express';
-import * as ticketService from '../services/ticket-serivce';
+import * as ticketService from '../services/ticket-service';
 import { Ticket } from '../models/Ticket';
 
 export const ticketRouter = express.Router();

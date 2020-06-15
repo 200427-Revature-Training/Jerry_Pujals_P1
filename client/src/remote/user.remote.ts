@@ -3,13 +3,6 @@ import { User } from '../models/User';
 import { Ticket } from '../models/Ticket';
 
 
-export const getAllUsers = async () => {
-    const response = await internalAxios.get<User[]>('/user');
-    console.log(response);
-    return response.data.map(user => {
-        return user;
-    });
-}
 
 
 export const getAllTickets = async (id: number) => {

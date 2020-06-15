@@ -94,14 +94,7 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
         renderManagerTicket(ticketlist);
 
     }
-    const setStatus = (ticket: Ticket) => {
-         managerRemote.changeStatus(ticket)
-           
-        // getAllTickets();
-         submit();
-
-        
-    }
+   
     const Refresh = () => {
 
         managerRemote.getAllTickets().then(ticket => {

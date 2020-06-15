@@ -17,16 +17,7 @@ const secretKey = 'qwertyuiooooooooooop';
     http://localhost:3000/user
     Retrieves an array of people from database
 */
-userRouter.get('', async (request, response, next) => {
-    try {
-        const users = await userService.getAllUsers();
-        response.json(users);
-    } catch (err) {
-        console.log(err);
-        response.sendStatus(500);
-    }
 
-});
 
 
 userRouter.post('/id', (request, response, next) => {
@@ -78,32 +69,3 @@ userRouter.post('/login', (request, response, next) => {
 
 
 
-
-userRouter.post('/login2', async (req, res) => {
-    const user1 = req.body;
-  
-    try {
-      // 1. Find user in array. If not exist send error
-      const user =  userService.login(user1);
-      if (!user) throw new Error('User does not exist');
-      // 2. Compare crypted password and see if it checks out. Send error if not
-      const valid = await compare(user1.password, user[0].password);
-      if (!valid) throw new Error('Password not correct');
-      // 3. Create Refresh- and Accesstoken
-      const accesstoken = createAccessToken(user[0].id);
-      const refreshtoken = createRefreshToken(user[0].id);
-      // 4. Store Refreshtoken with user in "db"
-      // Could also use different version numbers instead.
-      // Then just increase the version number on the revoke endpoint
-      user[0].refreshtoken = refreshtoken;
-      // 5. Send token. Refreshtoken as a cookie and accesstoken as a regular response
-      console.log('Acc Token '+accesstoken);
-      sendRefreshToken(res, refreshtoken);
-      sendAccessToken(res, req, accesstoken);
-      res.json(user);
-    } catch (err) {
-      res.send({
-        error: `${err.message}`,
-      });
-    }
-  });
