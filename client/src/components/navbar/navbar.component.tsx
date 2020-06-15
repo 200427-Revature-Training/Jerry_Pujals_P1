@@ -60,15 +60,7 @@ const test = "this is a stance";
                 <li className="nav-item active">
                         <Link to={{pathname:'/login', state: {user}}}>Login {renderOnCurrentPath('/login') }</Link>
                     </li>
-                <li className="nav-item active">
-                        <Link to="/user">User {renderOnCurrentPath('/user') }</Link>
-                    </li>    
-                    <li className="nav-item active">
-                        <Link to="/manager">Manager {renderOnCurrentPath('/manager') }</Link>
-                    </li>                 
-                    <li className="nav-item">
-                        <Link to="/accounts">Accounts {renderOnCurrentPath('/accounts') }</Link>
-                    </li>                
+                              
 
                 </ul>
             </div>

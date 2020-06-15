@@ -6,7 +6,6 @@ import { Modal, Button, Form, Col, Row, Container } from 'react-bootstrap';
 import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
 import { ManagerTicket } from '../ticketCard/managerTicket.component';
 import { Ticket } from '../../models/Ticket';
-import * as peopleRemote from '../../remote/people.remote';
 
 
 
@@ -45,6 +44,7 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
         if (u) {
             console.log("Manager report:" + u.firstName);
         }
+
         getAllTickets();
         renderManagerTicket(ticketlist);
        //
@@ -102,6 +102,14 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
 
         
     }
+    const Refresh = () => {
+
+        managerRemote.getAllTickets().then(ticket => {
+            setTickets(ticket);
+        });
+       renderManagerTicket(ticketlist);
+       
+    }
 
     
 
@@ -126,6 +134,10 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
                             className="btn btn-success"
                             onClick={() => setModalVisible(true)}
                         >Filter  Tickets</button>
+                        <button
+                            className="btn btn-success"
+                            onClick={() => Refresh()}
+                        >Refresh</button>
                     </div>
                 </Col>
                 <Col sm >

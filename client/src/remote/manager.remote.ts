@@ -5,7 +5,7 @@ import { Ticket } from '../models/Ticket';
 
 export const getAllUsers = async () => {
     const response = await internalAxios.get<User[]>('/user');
-    console.log(response);
+  //  console.log(response);
     return response.data.map(user => {
         return user;
     });
@@ -17,7 +17,7 @@ export const getAllUsers = async () => {
 export const getAllTickets = async () => {
     
     const response = await internalAxios.get<Ticket[]>('/ticket');
-    console.log(response);
+   // console.log(response);
     
     return response.data.map(tickets => {
         return tickets;
@@ -30,7 +30,7 @@ export const getUserById = async (id: Number | string | User) => {
 
 
     const response = await internalAxios.post<User[]>('/user/id', {id});
-    console.log(response);
+   // console.log(response);
     
     return response.data.map(users => {
         return users;
@@ -44,7 +44,7 @@ export const filterTickets = async (status: string) => {
     const response = await internalAxios.post<Ticket[]>('/ticket/filter',  {
         status
       });
-    console.log(response);
+   // console.log(response);
 
 
     return response.data.map(tickets => {
@@ -55,7 +55,7 @@ export const filterTickets = async (status: string) => {
 
 export const changeStatus = async (ticket : Ticket) => {
     const response = await internalAxios.post<Ticket[]>('/ticket/setStatus', {ticket});
-    console.log(response);
+    //console.log(response);
     return response.data.map(tickets => {
         return tickets;
     });

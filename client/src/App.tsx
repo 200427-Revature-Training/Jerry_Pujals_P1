@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import NavbarComponent from './components/navbar/navbar.component';
-import { AccountComponent } from './components/accounts/accounts.component';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import  UserComponent  from './components/user/user.component';                                        
 import  LoginComponent  from './components/login/login.component';
@@ -24,9 +23,6 @@ function App() {
               <UserComponent />
             </Route>
            
-            <Route path="/accounts">
-              <AccountComponent />
-            </Route>
             
           </Switch>
         </main>

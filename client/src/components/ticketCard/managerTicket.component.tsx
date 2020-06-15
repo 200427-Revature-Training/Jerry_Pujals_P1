@@ -102,14 +102,14 @@ export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket, Mana
         tick.reimbResolver = Manager.id;
         tick.reimbResolved = new Date;
         managerRemote.changeStatus(tick)
-    
+
     }
     const changeStatusToDenied = (tick: Ticket) => {
         tick.reimbStatus = 3;
         tick.reimbResolver = Manager.id;
         tick.reimbResolved = new Date;
-        managerRemote.changeStatus(tick)
-    
+        managerRemote.changeStatus(tick);
+
     }
 
     return (
@@ -126,11 +126,11 @@ export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket, Mana
             </div>
 
             <div className="rem-des"><span className="muted">Description: </span>{ticket.reimbDescription}</div>
-            <label> Approved   <input type="radio" value = 'Approve'  onClick={() =>  changeStatusToApproved (ticket)} />
-            
-             Denied <input type="radio" value = 'Deny' onClick={() =>  changeStatusToDenied (ticket)} />
-            
-            </label>
+            <form> Approved   <input type="radio" id="Approve" name="status" value='Approve' onClick={() => changeStatusToApproved(ticket)} />
+
+             Denied <input type="radio" id="Deny" name="status" value='Deny' onClick={() => changeStatusToDenied(ticket)} />
+
+            </form>
         </div>
 
         //
