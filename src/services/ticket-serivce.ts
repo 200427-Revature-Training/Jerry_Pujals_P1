@@ -24,7 +24,7 @@ export function newTicket(ticket: Ticket): Promise<Ticket[]>  {
     return ticketDao.newTicket(ticket);
 }
 
-export function setStatus(upTicket: Ticket): Promise<Ticket> {
+export function setStatus(upTicket: Ticket): Promise<Ticket[]> {
 
     // We don't want to create Date(undefined) so check if input.birthdate
     // is defined, otherwise just pass undefined along
@@ -37,9 +37,6 @@ export function setStatus(upTicket: Ticket): Promise<Ticket> {
     }
     else if(upTicket.reimbStatus == 'Denied'){
         upTicket.reimbStatus = 3;
-    }
-    else{
-        throw new Error('400');
     }
 
     

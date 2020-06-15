@@ -94,7 +94,7 @@ export const UserComponent: React.FC<RouteComponentProps> = (props) => {
         userRemote.makeNewTicket(tup).then(ticket => {
             setTickets(ticket);
         });   
-
+        getAllTickets();
         renderUserTickets(ticketlist );
         
 

@@ -8,10 +8,11 @@ import { User } from '../../models/User';
 
 interface TicketCardComponentProps {
     ticket: Ticket;
+    Manager: User;
 }
 
-export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket }) => {
-    const [approved, setApproved] = useState(false);
+export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket, Manager }) => {
+    const [approved, setApproved] = useState('');
 
     function setStatus(stat: string | number) {
 
@@ -46,13 +47,13 @@ export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket }) =>
     const [inputManager, setManager] = useState('Unresolved');
 
 
-    const getUser = (num: number | string | User ) => {
+    const getUser = (num: number | string | User) => {
 
 
 
         if (typeof num == 'number') {
             managerRemote.getUserById(num).then(user => {
-               
+
 
                 setUser(user[0].firstName + " " + user[0].lastName);
 
@@ -66,37 +67,50 @@ export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket }) =>
     }
     const getManager = (num: number | string | User | undefined) => {
 
- if(!num){
-     return "Unresolved";
- }
- 
-         if (typeof num == 'number') {
-             
-             managerRemote.getUserById(num).then(user => {
-                
- 
-                 setManager(user[0].firstName + " " + user[0].lastName);
- 
-             });
-         }
-         else {
-             setManager('Unresolved');
-         }
- 
-         return inputManager;
-     }
+        if (!num) {
+            return "Unresolved";
+        }
 
-     const resolvedDate = (str: Date | string | undefined) => {
+        if (typeof num == 'number') {
 
-        if(str == '' || !str){
+            managerRemote.getUserById(num).then(user => {
+
+
+                setManager(user[0].firstName + " " + user[0].lastName);
+
+            });
+        }
+        else {
+            setManager('Unresolved');
+        }
+
+        return inputManager;
+    }
+
+    const resolvedDate = (str: Date | string | undefined) => {
+
+        if (str == '' || !str) {
             return 'Unresolved';
         }
-        else{
+        else {
             return str;
         }
-     }
-   
-
+    }
+    //Prob wont update
+    const changeStatusToApproved = (tick: Ticket) => {
+        tick.reimbStatus = 2;
+        tick.reimbResolver = Manager.id;
+        tick.reimbResolved = new Date;
+        managerRemote.changeStatus(tick)
+    
+    }
+    const changeStatusToDenied = (tick: Ticket) => {
+        tick.reimbStatus = 3;
+        tick.reimbResolver = Manager.id;
+        tick.reimbResolved = new Date;
+        managerRemote.changeStatus(tick)
+    
+    }
 
     return (
         <div className="ticket-card">
@@ -107,17 +121,17 @@ export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket }) =>
                 <div className='child inline-block-child'><span className="muted">&ensp; Submitted: </span>{ticket.reimbSubmitted}</div>
                 <div className='child inline-block-child'><span className="muted">&ensp; Resolved Date: </span>{resolvedDate(ticket.reimbResolved)}</div>
                 <div className='child inline-block-child'><span className="muted">&ensp; Submitted By: </span>{getUser(ticket.reimbAuthor)}</div>
-                <div className='child inline-block-child'><span className="muted">&ensp; Approved By: </span>{ getManager(ticket.reimbResolver)}</div>
+                <div className='child inline-block-child'><span className="muted">&ensp; Approved By: </span>{getManager(ticket.reimbResolver)}</div>
                 <div className='child inline-block-child'><span className="muted">&ensp; Status: </span>{setStatus(ticket.reimbStatus)}</div>
             </div>
 
             <div className="rem-des"><span className="muted">Description: </span>{ticket.reimbDescription}</div>
-
+            <label>    <input type="checkbox" onChange={() =>  changeStatusToApproved (ticket)} />
+            Check Me!
+            </label>
         </div>
 
-        // <Form.Check  value={approved} onChange={(e) => setApproved(e.target.value) } >
-
-        // </Form.Check>
+        //
     )
 }
 

@@ -71,7 +71,7 @@ export const ManagerComponent: React.FC<RouteComponentProps> = (props) => {
         
 
         return ticket.map(ticket => {
-            return (<ManagerTicket key={ticket.reimbId} ticket={ticket}></ManagerTicket>)
+            return (<ManagerTicket key={ticket.reimbId} ticket={ticket} Manager ={u}></ManagerTicket>)
         })
 
 

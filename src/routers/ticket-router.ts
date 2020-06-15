@@ -106,17 +106,21 @@ console.log(status);
 
 
 ticketRouter.patch('/setStatus', (request, response, next) => {
-    const upTicket = request.body;
+    let upTicket = request.body.ticket;
     ticketService.setStatus(upTicket)
-        .then(updatedTicket => {
-            if (updatedTicket) {
-                response.json(ticketService.getAllTickets());
-            } else {
-                response.sendStatus(404);
-            }
-        }).catch(err => {
-            response.sendStatus(500);
-        }).finally(() => {
-            next();
-        })
+    .then(reuser => {
+
+        if(reuser[0].reimbId){
+        response.status(200);
+        response.json(reuser);
+        }
+        else{
+            response.status(404);
+        }
+        
+        next();
+    }).catch(err => {
+        response.sendStatus(500);
+        next();
+    });
 });
