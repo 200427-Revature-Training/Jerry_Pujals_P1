@@ -52,7 +52,7 @@ describe('POST /ticket/id', () => {
         mockTicketService.getById.mockImplementation(async () => { throw new Error() });
 
         const payload = {
-            id: 1
+            id: 'not a number'
         };
 
         await request(app)
