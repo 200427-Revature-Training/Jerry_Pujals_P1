@@ -126,11 +126,10 @@ export const ManagerTicket: React.FC<TicketCardComponentProps> = ({ ticket, Mana
             </div>
 
             <div className="rem-des"><span className="muted">Description: </span>{ticket.reimbDescription}</div>
-            <label>    <input type="checkbox" onChange={() =>  changeStatusToApproved (ticket)} />
-            Approve
-            </label>
-            <label>    <input type="checkbox" onChange={() =>  changeStatusToDenied (ticket)} />
-            Deny
+            <label>    <input type="radio" value = 'Approve'  onClick={() =>  changeStatusToApproved (ticket)} />
+            
+             <input type="radio" value = 'Deny' onClick={() =>  changeStatusToDenied (ticket)} />
+            
             </label>
         </div>
 

@@ -150,22 +150,29 @@ export function newTicket(upTicket: Ticket): Promise<Ticket[]> {
 
 export function setStatus(upTicket: Ticket): Promise<Ticket[]> {
 
-//UPDATE reimbursement SET reim_status_id = COALESCE($1, reim_status_id) WHERE reim_id = $2 RETURNING *
+    //UPDATE reimbursement SET reim_status_id = COALESCE($1, reim_status_id) WHERE reim_id = $2 RETURNING *
     const sql = `UPDATE reimbursement
     SET reim_resolved=$1, reim_resolver=$2, reim_status_id=$3
     WHERE reim_id=$4 RETURNING *`;
 
     const params = [upTicket.reimbResolved, upTicket.reimbResolver, upTicket.reimbStatus, upTicket.reimbId];
-
-    return db.query<TicketRow>(sql, params).then(result => {
+    db.query<TicketRow>(sql, params).then(result => {
         const rows: TicketRow[] = result.rows;
         console.log(rows);
         const tickets: Ticket[] = rows.map(row => Ticket.from(row));
-        return tickets;
+        //  return tickets;
     }).catch(err => {
         console.log(err);
         return undefined;
     });
+    let num: number = 0;
+    if (typeof upTicket.reimbAuthor == 'number') {
+        num = upTicket.reimbAuthor;
+    }
+
+    return getById(num);
+
+
 }
 
 
